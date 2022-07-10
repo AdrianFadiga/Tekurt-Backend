@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `signs` (
     `id` VARCHAR(191) NOT NULL,
-    `sign` VARCHAR(15) NOT NULL,
+    `sign` VARCHAR(20) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -30,17 +30,28 @@ CREATE TABLE `users` (
     `username` VARCHAR(20) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
     `password` VARCHAR(200) NOT NULL,
-    `image_url` VARCHAR(255) NOT NULL,
+    `image_url` VARCHAR(500) NOT NULL,
     `social_status_id` VARCHAR(191) NOT NULL,
-    `birth_date` DATETIME(3) NOT NULL,
     `children` BOOLEAN NOT NULL,
     `smokes` BOOLEAN NOT NULL,
     `drinking_id` VARCHAR(191) NOT NULL,
     `sign_id` VARCHAR(191) NOT NULL,
     `biography` VARCHAR(300) NOT NULL,
-    `active` BOOLEAN NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_name` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `posts` (
+    `id` VARCHAR(191) NOT NULL,
+    `content` VARCHAR(300) NOT NULL,
+    `author_id` VARCHAR(191) NOT NULL,
+    `mediaUrl` VARCHAR(500) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -53,3 +64,6 @@ ALTER TABLE `users` ADD CONSTRAINT `users_social_status_id_fkey` FOREIGN KEY (`s
 
 -- AddForeignKey
 ALTER TABLE `users` ADD CONSTRAINT `users_drinking_id_fkey` FOREIGN KEY (`drinking_id`) REFERENCES `drinking`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `posts` ADD CONSTRAINT `posts_author_id_fkey` FOREIGN KEY (`author_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
