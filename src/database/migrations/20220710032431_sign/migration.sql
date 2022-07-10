@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `signs` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `id` VARCHAR(191) NOT NULL,
     `sign` VARCHAR(15) NOT NULL,
 
     PRIMARY KEY (`id`)
