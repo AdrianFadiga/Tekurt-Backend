@@ -9,7 +9,7 @@ describe('Testa a model de User', () => {
 
   it('Verifica se o método getByEmail existe', () => {
     const model = new UserModel();
-    expect(typeof model.getByEmail).toBe('function');
+    expect(typeof model.getByEmailOrUsername).toBe('function');
   });
 
   describe('Em caso de sucesso', () => {
@@ -24,7 +24,7 @@ describe('Testa a model de User', () => {
     it('Testa se retorna o usuario', async () => {
       const model = new UserModel();
 
-      const response = await model.getByEmail(userMock.email);
+      const response = await model.getByEmailOrUsername(userMock.email);
 
       expect(response).toBe(userMock);
     });
