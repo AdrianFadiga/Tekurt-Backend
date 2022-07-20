@@ -17,6 +17,14 @@ const userMock = {
 	updatedAt: '2022-07-10T05:14:03.726Z'
 }
 
+const userLogin = {
+	id: '95a744e9-9270-47af-9cf6-b99fcee47ff0',
+	username: 'usuario',
+	email: 'teste@teste.com',
+	password: 'teste',
+}
+
 export {
-  userMock
+  userMock,
+	userLogin
 }

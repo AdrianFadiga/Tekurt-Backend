@@ -1,6 +1,6 @@
-import UserRepository from '../../../api/repositories/user.repository';
-import { userMock } from '../mocks/user';
-import UserModel from '../../../api/models/user.model';
+import UserRepository from '../../../api/repositories/login.repository';
+import { userMock, userLogin } from '../mocks/user';
+import UserModel from '../../../api/models/login.model';
 
 describe('Testa a "repository" de User', () => {
   it('Verifica se a "repository" existe', () => {
@@ -23,10 +23,10 @@ describe('Testa a "repository" de User', () => {
       (model.getByEmailOrUsername as jest.Mock).mockReset();
     });
 
-    it('Testa se retorna o usuário', async () => {
+    it('Testa se retorna as informações especificas', async () => {
       const response = await repository.getByEmailOrUsername(userMock.username);
 
-      expect(response).toBe(userMock);
+      expect(response).toStrictEqual(userLogin);
     });
   });
 
