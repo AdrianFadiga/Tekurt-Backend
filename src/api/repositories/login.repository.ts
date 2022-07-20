@@ -7,9 +7,13 @@ export default class LoginRepository {
     const userData = await this.model.getByEmailOrUsername(user);
 
     if (!userData) return userData;
+    // remover
 
     const { email, username, password, id } = userData;
+    // remover
 
     return { email, username, password, id };
+    
+    // return userData;
   }
 }
