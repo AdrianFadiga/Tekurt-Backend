@@ -2,12 +2,12 @@ import UserModel from '../../../api/models/user.model'
 import { userMock } from '../mocks/user';
 import { prisma } from '../../../database/prismaClient'
 
-describe('Testa a model de User', () => {
+describe('Testa a "model" de User', () => {
   it('Verifica se a model existe', () => {
     expect(typeof UserModel).toBe('function');
   });
 
-  it('Verifica se o método getByEmail existe', () => {
+  it('Verifica se o método getByEmailOrUsername existe', () => {
     const model = new UserModel();
     expect(typeof model.getByEmailOrUsername).toBe('function');
   });

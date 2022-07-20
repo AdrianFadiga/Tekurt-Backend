@@ -1,0 +1,48 @@
+import UserRepository from '../../../api/repositories/user.repository';
+import { userMock } from '../mocks/user';
+import UserModel from '../../../api/models/user.model';
+
+describe('Testa a "repository" de User', () => {
+  it('Verifica se a "repository" existe', () => {
+    expect(typeof UserRepository).toBe('function');
+  });
+
+  const model = new UserModel();
+  const repository = new UserRepository(model);
+
+  it('Verifica se o método getByEmailOrUsername existe', () => {
+    expect(typeof repository.getByEmailOrUsername).toBe('function');
+  });
+
+  describe('Caso o usuário exista', () => {
+    beforeEach(() => {
+      model.getByEmailOrUsername = jest.fn().mockResolvedValue(userMock)
+    });
+
+    afterEach(() => {
+      (model.getByEmailOrUsername as jest.Mock).mockReset();
+    });
+
+    it('Testa se retorna o usuário', async () => {
+      const response = await repository.getByEmailOrUsername(userMock.username);
+
+      expect(response).toBe(userMock);
+    });
+  });
+
+  describe('Caso o usuário não exista', () => {
+    beforeEach(() => {
+      model.getByEmailOrUsername = jest.fn().mockResolvedValue(null)
+    });
+
+    afterEach(() => {
+      (model.getByEmailOrUsername as jest.Mock).mockReset();
+    });
+
+    it('Testa se retorna null', async () => {
+      const response = await repository.getByEmailOrUsername(userMock.username);
+
+      expect(response).toBe(null);
+    });
+  });
+});
