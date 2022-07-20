@@ -1,7 +1,7 @@
-import UserRepository from '../repositories/user.repository';
+import LoginRepository from '../repositories/login.repository';
 
-export default class UserService {
-  constructor(private repository: UserRepository) {}
+export default class LoginService {
+  constructor(private repository: LoginRepository) {}
 
   public async getByEmailOrUsername(user: string) {
     const userData = await this.repository.getByEmailOrUsername(user);    

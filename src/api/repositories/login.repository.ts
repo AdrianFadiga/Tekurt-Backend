@@ -1,7 +1,7 @@
-import UserModel from '../models/user.model';
+import LoginModel from '../models/login.model';
 
-export default class UserRepository {
-  constructor(private model: UserModel) {}
+export default class LoginRepository {
+  constructor(private model: LoginModel) {}
 
   public async getByEmailOrUsername(user: string) {
     const userData = await this.model.getByEmailOrUsername(user);

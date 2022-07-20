@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import UserService from '../services/user.service';
+import LoginService from '../services/login.service';
 
-export default class UserController {
-  constructor(private service: UserService) {}
+export default class LoginController {
+  constructor(private service: LoginService) {}
 
   public async getByEmailOrUsername(req: Request, res: Response) {
     const { user } = req.body;
