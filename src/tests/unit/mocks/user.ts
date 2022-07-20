@@ -1,21 +1,20 @@
 const userMock = {
-  id: 'dadaddwada',
-  email: 'teste@teste.com',
-  username: 'usuario',
-  password: 'senha',
-  biography: 'biografia',
-  children: true,
-  firstName: 'nome',
-  lastName: 'sobrenome',
-  imageUrl: 'urlImagem',
-  smokes: false,
-  drinkingId: 'as vezes',
-  birthDate: '2022-07-10T05:16:47.842Z',
-  socialStatusId: 'casado',
-  signId: 'aquario',
-  active: true,
-  createdAt: '2022-07-10T05:16:47.842Z',
-  updatedAt: '2022-07-10T05:16:47.842Z'
+	id: '95a744e9-9270-47af-9cf6-b99fcee47ff0',
+	firstName: 'nome',
+	lastName: 'sobrenome',
+	username: 'usuario',
+	email: 'teste@teste.com',
+	password: 'teste',
+	imageUrl: 'url_imagem',
+	socialStatusId: '7f08afd5-4b4c-48bd-856f-935c684cc56a',
+	children: false,
+	smokes: false,
+	drinkingId: '56b726bb-72a3-4865-950d-09f1dd5a5ccb',
+	signId: 'd1e4d5b3-a0f3-4e17-8703-d10fb274e582',
+	biography: 'biografia',
+	active: true,
+	createdAt: '2022-07-10T05:14:03.726Z',
+	updatedAt: '2022-07-10T05:14:03.726Z'
 }
 
 export {

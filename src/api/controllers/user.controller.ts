@@ -9,6 +9,6 @@ export default class UserController {
 
     const userData = await this.service.getByEmailOrUsername(user);
 
-    return res.status(200).json({ userData });
+    return res.status(200).json(userData);
   }
 }

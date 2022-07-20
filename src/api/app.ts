@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import routes from './routes';
 
 class App {
   public app: express.Express;
@@ -14,7 +15,8 @@ class App {
 
   private config(): void {
     this.app.use(express.json());
-    this.app.use(cors());    
+    this.app.use(cors()); 
+    this.app.use(routes);
   }
 
   public start(PORT: string | number):void {

@@ -5,6 +5,8 @@ export default class UserModel {
     const userData = prisma.user.findFirst({ where: {
       OR: [{ email: user }, { username: user }]
     } });
+    console.log('model', userData);
+    
 
     return userData;
   }

@@ -5,7 +5,6 @@ export default class UserRepository {
 
   public async getByEmailOrUsername(user: string) {
     const userData = await this.model.getByEmailOrUsername(user);
-    console.log('repository', userData);
 
     return userData;
   }
