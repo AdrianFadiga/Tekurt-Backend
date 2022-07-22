@@ -1,5 +1,5 @@
 import UserRepository from '../../../api/repositories/login.repository';
-import { userMock, userLogin } from '../mocks/user';
+import { userLogin } from '../mocks/user';
 import UserModel from '../../../api/models/login.model';
 
 describe('Testa a "repository" de User', () => {
@@ -16,7 +16,7 @@ describe('Testa a "repository" de User', () => {
 
   describe('Caso o usuário exista', () => {
     beforeEach(() => {
-      model.getByEmailOrUsername = jest.fn().mockResolvedValue(userMock)
+      model.getByEmailOrUsername = jest.fn().mockResolvedValue(userLogin)
     });
 
     afterEach(() => {
@@ -24,7 +24,7 @@ describe('Testa a "repository" de User', () => {
     });
 
     it('Testa se retorna as informações especificas', async () => {
-      const response = await repository.getByEmailOrUsername(userMock.username);
+      const response = await repository.getByEmailOrUsername(userLogin.username);
 
       expect(response).toStrictEqual(userLogin);
     });
@@ -40,7 +40,7 @@ describe('Testa a "repository" de User', () => {
     });
 
     it('Testa se retorna null', async () => {
-      const response = await repository.getByEmailOrUsername(userMock.username);
+      const response = await repository.getByEmailOrUsername(userLogin.username);
 
       expect(response).toBe(null);
     });

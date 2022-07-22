@@ -6,14 +6,6 @@ export default class LoginRepository {
   public async getByEmailOrUsername(user: string) {
     const userData = await this.model.getByEmailOrUsername(user);
 
-    if (!userData) return userData;
-    // remover
-
-    const { email, username, password, id } = userData;
-    // remover
-
-    return { email, username, password, id };
-    
-    // return userData;
+    return userData;
   }
 }
