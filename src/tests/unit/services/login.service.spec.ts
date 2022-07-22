@@ -1,7 +1,7 @@
-import UserService from '../../../api/services/user.service';
+import UserService from '../../../api/services/login.service';
 import { userMock } from '../mocks/user';
-import UserRepository from '../../../api/repositories/user.repository';
-import UserModel from '../../../api/models/user.model';
+import UserRepository from '../../../api/repositories/login.repository';
+import UserModel from '../../../api/models/login.model';
 
 describe('Testa a "service" de user', () => {
   it('Verifica se a "service" existe', () => {
@@ -16,7 +16,7 @@ describe('Testa a "service" de user', () => {
     expect(typeof service.getByEmailOrUsername).toBe('function');
   });
   
-  describe('Caso o usuário exista', () => {
+  describe('Caso o usuário exista e a senha esteja correta', () => {
     beforeEach(() => {
       repository.getByEmailOrUsername = jest.fn().mockResolvedValue(userMock);
     });
