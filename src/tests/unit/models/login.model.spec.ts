@@ -1,5 +1,5 @@
-import UserModel from '../../../api/models/user.model'
-import { userMock } from '../mocks/user';
+import UserModel from '../../../api/models/login.model'
+import { userLogin } from '../mocks/user';
 import { prisma } from '../../../database/prismaClient'
 
 describe('Testa a "model" de User', () => {
@@ -14,19 +14,19 @@ describe('Testa a "model" de User', () => {
 
   describe('Em caso de sucesso', () => {
     beforeEach(() => {
-      prisma.user.findFirst = jest.fn().mockResolvedValue(userMock);
+      prisma.user.findFirst = jest.fn().mockResolvedValue(userLogin);
     });
 
     afterEach(() => {
       (prisma.user.findFirst as jest.Mock).mockReset();
     });
 
-    it('Testa se retorna o usuario', async () => {
+    it('Testa se retorna o usuario com os dados corretos ao passar o username', async () => {
       const model = new UserModel();
 
-      const response = await model.getByEmailOrUsername(userMock.email);
+      const response = await model.getByEmailOrUsername(userLogin.username);
 
-      expect(response).toBe(userMock);
+      expect(response).toEqual(userLogin);
     });
   });
 });

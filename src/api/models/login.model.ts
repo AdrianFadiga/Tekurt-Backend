@@ -5,13 +5,13 @@ export default class LoginModel {
     const userData = prisma.user.findFirst({
       where: {
         OR: [{ email: user }, { username: user }]
+      },
+      select: {
+        username: true,
+        id: true,
+        email: true,
+        password: true
       }
-      // select: {
-      //   username: true,
-      //   id: true,
-      //   email: true,
-      //   password: true
-      // }
     });    
 
     return userData;
