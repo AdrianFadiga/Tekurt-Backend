@@ -1,5 +1,6 @@
+import { JWT } from './../../../utils/tokenUtils';
 import UserService from '../../../api/services/login.service';
-import { userMock } from '../mocks/user';
+import { userLogin } from '../mocks/user';
 import UserRepository from '../../../api/repositories/login.repository';
 import UserModel from '../../../api/models/login.model';
 
@@ -13,16 +14,25 @@ describe('Testa a "service" de user', () => {
   const service = new UserService(repository);
 
   it('Verifica se o método getByEmailOrUsername existe', () => {
-    expect(typeof service.getByEmailOrUsername).toBe('function');
+    expect(typeof service.sigIn).toBe('function');
   });
   
   describe('Caso o usuário exista e a senha esteja correta', () => {
     beforeEach(() => {
-      repository.getByEmailOrUsername = jest.fn().mockResolvedValue(userMock);
+      repository.getByEmailOrUsername = jest.fn().mockResolvedValue(userLogin);
     });
 
-    it('Testa se retorna o token corretamente', () => {
-      
+    const { email, id, username } = userLogin;
+
+    const token = JWT.encryptToken({ email, id, username  });
+
+    it('Testa se retorna o token corretamente', async () => {
+      const response = await service.sigIn(userLogin.username);
+
+      expect(response).toBe(token);
+      const decodedToken = JWT.decryptToken(response);
+
+      expect(decodedToken).toEqual({ email, id, username });
     });
   });
 });
