@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test:unit": "jest --collectCoverage --verbose src/tests/unit",
     "build": "tsc",
     "start": "npm run build && node ./build/server.js",
     "dev": "tsnd src/api/server.ts"
