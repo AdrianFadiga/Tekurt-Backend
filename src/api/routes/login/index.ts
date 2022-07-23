@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import FactoryLayers from '../../factory/loginLayers';
+import { BuildLayers } from '../../builder/loginLayers';
 
 const routes = Router();
-const controller = FactoryLayers.factoryLogin();
+const controller = BuildLayers.factoryLogin();
 
 routes.post('/', controller.getByEmailOrUsername.bind(controller));
 
