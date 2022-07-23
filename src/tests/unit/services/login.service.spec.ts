@@ -1,21 +1,20 @@
 import bcrytp from 'bcrypt';
-import { GenerateError } from './../../../utils/generateError';
 import { JWT } from './../../../utils/tokenUtils';
-import UserService from '../../../api/services/login.service';
+import LoginService from '../../../api/services/login.service';
 import { userLogin } from '../mocks/user';
-import UserRepository from '../../../api/repositories/login.repository';
-import UserModel from '../../../api/models/login.model';
+import LoginRepository from '../../../api/repositories/login.repository';
+import LoginModel from '../../../api/models/login.model';
 
-describe('Testa a "service" de user', () => {
+describe('Testa a "service" de login', () => {
   it('Verifica se a "service" existe', () => {
-    expect(typeof UserService).toBe('function');
+    expect(typeof LoginService).toBe('function');
   });
 
-  const model = new UserModel();
-  const repository = new UserRepository(model);
-  const service = new UserService(repository);
+  const model = new LoginModel();
+  const repository = new LoginRepository(model);
+  const service = new LoginService(repository);
 
-  it('Verifica se o método getByEmailOrUsername existe', () => {
+  it('Verifica se o método sigIn existe', () => {
     expect(typeof service.sigIn).toBe('function');
   });
   

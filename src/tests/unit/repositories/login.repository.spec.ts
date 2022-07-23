@@ -1,14 +1,14 @@
-import UserRepository from '../../../api/repositories/login.repository';
+import LoginRepository from '../../../api/repositories/login.repository';
 import { userLogin } from '../mocks/user';
-import UserModel from '../../../api/models/login.model';
+import LoginModel from '../../../api/models/login.model';
 
-describe('Testa a "repository" de User', () => {
+describe('Testa a "repository" de Login', () => {
   it('Verifica se a "repository" existe', () => {
-    expect(typeof UserRepository).toBe('function');
+    expect(typeof LoginRepository).toBe('function');
   });
 
-  const model = new UserModel();
-  const repository = new UserRepository(model);
+  const model = new LoginModel();
+  const repository = new LoginRepository(model);
 
   it('Verifica se o método getByEmailOrUsername existe', () => {
     expect(typeof repository.getByEmailOrUsername).toBe('function');
