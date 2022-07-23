@@ -5,6 +5,6 @@ export class ErrorHandler {
   static generic(err: GenerateError, req: Request, res: Response, _next: NextFunction) {
     if (err.statusCode) return res.status(err.statusCode).json({ message: err.message });
 
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({ message: err.message });
   }
 }
