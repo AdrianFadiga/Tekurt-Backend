@@ -1,3 +1,4 @@
+import bcrytp from 'bcrypt';
 import { GenerateError } from './../../../utils/generateError';
 import { JWT } from './../../../utils/tokenUtils';
 import UserService from '../../../api/services/login.service';
@@ -21,10 +22,12 @@ describe('Testa a "service" de user', () => {
   describe('Caso o usuário exista e a senha esteja correta', () => {
     beforeEach(() => {
       repository.getByEmailOrUsername = jest.fn().mockResolvedValue(userLogin);
+      bcrytp.compare = jest.fn().mockResolvedValue(true);
     });
 
     afterEach(() => {
       (repository.getByEmailOrUsername as jest.Mock).mockReset();
+      (bcrytp.compare as jest.Mock).mockReset();
     });
 
     const { email, id, username } = userLogin;
@@ -32,9 +35,9 @@ describe('Testa a "service" de user', () => {
     const token = JWT.encryptToken({ email, id, username  });
 
     it('Testa se retorna o token corretamente', async () => {
-      const response = await service.sigIn(userLogin.username);
+      const response = await service.sigIn(userLogin.username, userLogin.password);
 
-      expect(response).toBe(token);
+      expect(response).toBeDefined();
       const decodedToken = JWT.decryptToken(response);
 
       expect(decodedToken).toEqual({ email, id, username });
@@ -53,11 +56,33 @@ describe('Testa a "service" de user', () => {
     it('Testa se retorna um erro com o status "404" e a mensagem "Incorret user or password"', async () => {
       expect.assertions(2);
       try {
-        await service.sigIn(userLogin.username)
+        await service.sigIn(userLogin.username, userLogin.password);
       } catch (error: any) {
         expect(error.message).toBe('Incorret user or password');
         expect(error.statusCode).toBe(404);
       }     
+    });
+  });
+
+  describe('Caso o usuário exista mas a senha esteja incorreta', () => {
+    beforeEach(() => {
+      repository.getByEmailOrUsername = jest.fn().mockResolvedValue(null);
+      bcrytp.compare = jest.fn().mockResolvedValue(false);
+    });
+
+    afterEach(() => {
+      (repository.getByEmailOrUsername as jest.Mock).mockReset();
+      (bcrytp.compare as jest.Mock).mockReset();
+    });
+
+    it('Testa se retorna um erro com o status "404" e a mensagem "Incorret user or password', async () => {
+      expect.assertions(2);
+      try {
+        await service.sigIn(userLogin.username, userLogin.password);
+      } catch (error: any) {
+        expect(error.message).toBe('Incorret user or password');
+        expect(error.statusCode).toBe(404);
+      } 
     });
   });
 });
