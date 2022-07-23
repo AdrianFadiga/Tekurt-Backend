@@ -1,5 +1,7 @@
+import { GenerateError } from './../../utils/generateError';
 import { JWT } from '../../utils/tokenUtils';
 import LoginRepository from '../repositories/login.repository';
+import bcrytp from 'bcrypt';
 
 export default class LoginService {
   constructor(private repository: LoginRepository) {}
@@ -7,8 +9,10 @@ export default class LoginService {
   public async sigIn(user: string) {
     const userData = await this.repository.getByEmailOrUsername(user);
 
-    if (!userData) return '';
-    
+    if (!userData) throw new GenerateError(404, 'Incorret user or password');
+
+    // const teste = await bcrytp.hash(userData.password, 8);
+
     const { email, id, username } = userData;
     
     const token = JWT.encryptToken({ email, id, username });

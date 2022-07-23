@@ -1,3 +1,4 @@
+import { GenerateError } from './../../../utils/generateError';
 import { JWT } from './../../../utils/tokenUtils';
 import UserService from '../../../api/services/login.service';
 import { userLogin } from '../mocks/user';
@@ -22,6 +23,10 @@ describe('Testa a "service" de user', () => {
       repository.getByEmailOrUsername = jest.fn().mockResolvedValue(userLogin);
     });
 
+    afterEach(() => {
+      (repository.getByEmailOrUsername as jest.Mock).mockReset();
+    });
+
     const { email, id, username } = userLogin;
 
     const token = JWT.encryptToken({ email, id, username  });
@@ -33,6 +38,26 @@ describe('Testa a "service" de user', () => {
       const decodedToken = JWT.decryptToken(response);
 
       expect(decodedToken).toEqual({ email, id, username });
+    });
+  });
+
+  describe('Caso o usuário nao exista', () => {
+    beforeEach(() => {
+      repository.getByEmailOrUsername = jest.fn().mockResolvedValue(null);
+    });
+
+    afterEach(() => {
+      (repository.getByEmailOrUsername as jest.Mock).mockReset();
+    });
+
+    it('Testa se retorna um erro com o status "404" e a mensagem "Incorret user or password"', async () => {
+      expect.assertions(2);
+      try {
+        await service.sigIn(userLogin.username)
+      } catch (error: any) {
+        expect(error.message).toBe('Incorret user or password');
+        expect(error.statusCode).toBe(404);
+      }     
     });
   });
 });
