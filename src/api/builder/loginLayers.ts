@@ -3,7 +3,7 @@ import LoginService from '../services/login.service';
 import LoginRepository from '../repositories/login.repository';
 import LoginModel from '../models/login.model';
 
-export default class FactoryLayers {
+export class BuildLayers {
   static factoryLogin() {
     const model = new LoginModel();
     const repository = new LoginRepository(model);
