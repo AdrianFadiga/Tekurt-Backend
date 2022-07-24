@@ -70,4 +70,28 @@ describe('Em casos de erro', () => {
       expect(response.body.message).toBe('"password" is not allowed to be empty');
     });
   });
+
+  describe('Caso a requisição seja feita com um usuário incorreto', () => {
+    it('Testa se retorna o status e mensagem corretos, caso passe o usuario errado', async () => {
+      const response = await app.post('/login').send({
+        user: 'usuario_que_nao_existe',
+        password: 'teste'
+      });
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('Incorret user or password');
+    });
+
+    it('Testa se retorna o status e mensagem corretos, caso passe a senha errada', async () => {
+      const response = await app.post('/login').send({
+        user: 'usuario',
+        password: 'senha_errada'
+      });
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('Incorret user or password');
+    });
+  });
 });
