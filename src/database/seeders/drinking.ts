@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../prismaClient';
 
 async function main() {
   const options = ['Sim', 'Não', 'As vezes', 'Socialmente', 'Com os amigos'];

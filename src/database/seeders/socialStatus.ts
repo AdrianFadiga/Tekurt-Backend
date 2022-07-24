@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../prismaClient';
 
 async function main() {
   const socialStatus = ['Solteiro(a)', 'Namorando', 'Noivo(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Enrolado(a)'];

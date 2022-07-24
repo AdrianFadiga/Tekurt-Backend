@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../prismaClient';
 
 async function main() {  
   await prisma.user.create({
@@ -8,13 +7,8 @@ async function main() {
       lastName: 'sobrenome',
       username: 'usuario',
       email: 'teste@teste.com',
-      password: 'teste',
+      password: '$2b$08$YqzWMbcBWAJwwm/djC2njelPHJxzDtb9d17rUfQFUxoKVoOmrTMkC',
       imageUrl: 'url_imagem',
-      socialStatusId: '7f08afd5-4b4c-48bd-856f-935c684cc56a',
-      children: false,
-      smokes: false,
-      drinkingId: '56b726bb-72a3-4865-950d-09f1dd5a5ccb',
-      signId: 'd1e4d5b3-a0f3-4e17-8703-d10fb274e582',
       biography: 'biografia',
     }
   });
