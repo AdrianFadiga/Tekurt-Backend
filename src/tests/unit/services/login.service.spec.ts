@@ -29,9 +29,7 @@ describe('Testa a "service" de login', () => {
       (bcrytp.compare as jest.Mock).mockReset();
     });
 
-    const { email, id, username } = userLogin;
-
-    const token = JWT.encryptToken({ email, id, username  });
+    const { email, username } = userLogin;
 
     it('Testa se retorna o token corretamente', async () => {
       const response = await service.sigIn(userLogin.username, userLogin.password);
@@ -39,7 +37,9 @@ describe('Testa a "service" de login', () => {
       expect(response).toBeDefined();
       const decodedToken = JWT.decryptToken(response);
 
-      expect(decodedToken).toEqual({ email, id, username });
+      expect(decodedToken.id).toBeDefined();
+      expect(decodedToken.email).toBe(email);
+      expect(decodedToken.username).toBe(username);
     });
   });
 
