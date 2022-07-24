@@ -1,5 +1,4 @@
 import { Request, NextFunction, Response } from 'express';
-import Joi from 'joi';
 import { GenerateError } from '../../utils/generateError';
 import { loginSchema } from '../schemas/loginSchema';
 

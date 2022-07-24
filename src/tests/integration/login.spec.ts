@@ -25,15 +25,49 @@ describe('Em caso de sucesso', () => {
 });
 
 describe('Em casos de erro', () => {
-  describe('Caso a requisição seja passada', () => {
-    it('Sem o campo user, testa se retorna o status e a mensagm', async () => {
+  describe('Caso a requisição seja passada sem os campos', () => {
+    it('Caso não passe o campo "user", testa se retorna o status e a mensagem correta', async () => {
       const response = await app.post('/login').send({
         password: 'teste'
       });
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('Campo necessario');
+      expect(response.body.message).toBe('"user" is required');
+    });
+
+    it('Caso não passe o campo "password", testa se retorna o status e a mensagem correta', async () => {
+      const response = await app.post('/login').send({
+        user: 'usuario'
+      });
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('"password" is required');
+    });
+  });
+
+  describe('Caso seja passado os campos, mas vazio', () => {
+    it('Caso o campo "user" esteja vazio, testa se retorna o status e a mensagem correta', async () => {
+      const response = await app.post('/login').send({
+        user: '',
+        password: 'teste'
+      });
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('"user" is not allowed to be empty');
+    });
+
+    it('Caso o campo "user" esteja vazio, testa se retorna o status e a mensagem correta', async () => {
+      const response = await app.post('/login').send({
+        user: 'usuario',
+        password: ''
+      });
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('"password" is not allowed to be empty');
     });
   });
 });
