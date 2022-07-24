@@ -23,3 +23,17 @@ describe('Em caso de sucesso', () => {
     expect(decodedToken.username).toBe(username);
   });
 });
+
+describe('Em casos de erro', () => {
+  describe('Caso a requisição seja passada', () => {
+    it('Sem o campo user, testa se retorna o status e a mensagm', async () => {
+      const response = await app.post('/login').send({
+        password: 'teste'
+      });
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toBe('Campo necessario');
+    });
+  });
+});
