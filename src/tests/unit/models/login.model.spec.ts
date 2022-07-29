@@ -1,6 +1,6 @@
 import LoginModel from '../../../api/models/login.model'
 import { userLogin } from '../mocks/user';
-import { prisma } from '../../../database/prismaClient'
+import { prisma } from '../../../../prisma/prismaClient'
 
 describe('Testa a "model" de Login', () => {
   it('Verifica se a model existe', () => {

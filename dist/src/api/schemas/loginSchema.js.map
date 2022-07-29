@@ -1,0 +1,1 @@
+{"version":3,"file":"loginSchema.js","sourceRoot":"","sources":["../../../../src/api/schemas/loginSchema.ts"],"names":[],"mappings":";;;AAAA,6BAAsB;AAET,QAAA,WAAW,GAAG,aAAG,CAAC,MAAM,CAAC;IACpC,IAAI,EAAE,aAAG,CAAC,MAAM,EAAE,CAAC,QAAQ,EAAE,CAAC,KAAK,EAAE;IACrC,QAAQ,EAAE,aAAG,CAAC,MAAM,EAAE,CAAC,QAAQ,EAAE,CAAC,KAAK,EAAE;CAC1C,CAAC,CAAC"}

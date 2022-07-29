@@ -1,4 +1,4 @@
-import { prisma } from '../../database/prismaClient';
+import { prisma } from '../../../prisma/prismaClient';
 
 export default class LoginModel {
   public async getByEmailOrUsername(user: string) {
