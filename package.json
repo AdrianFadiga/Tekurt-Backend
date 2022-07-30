@@ -34,6 +34,7 @@
     "@types/jest": "^28.1.4",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.3",
+    "@types/passport-jwt": "^3.0.6",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
@@ -48,7 +49,10 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.7",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.7",
+    "@nestjs/jwt": "^9.0.0",
+    "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.7",
     "@nestjs/testing": "^9.0.7",
     "@prisma/client": "^4.0.0",
@@ -61,6 +65,8 @@
     "express-async-errors": "^3.1.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "prisma": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.6"

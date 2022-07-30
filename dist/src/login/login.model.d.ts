@@ -3,9 +3,9 @@ export declare class LoginModel {
     private prisma;
     constructor(prisma: DatabaseService);
     signIn(user: string): Promise<{
-        id: string;
         username: string;
         email: string;
+        id: string;
         password: string;
     }>;
 }
