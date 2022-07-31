@@ -18,7 +18,7 @@ export class JWT {
 
   static decryptToken(token: string) {
     const { data } = jwt.verify(token, JWT.secret) as jwt.JwtPayload; 
-
+    
     return data;
   } 
 }

@@ -1,4 +1,4 @@
-import supertest from 'supertest';
+import * as supertest from 'supertest';
 import 'dotenv/config';
 import { JWT } from '../../utils/tokenUtils';
 import { userLogin } from '../unit/mocks/user';
@@ -16,8 +16,8 @@ describe('Em caso de sucesso', () => {
     expect(response.body.token).toBeDefined();
 
     const decodedToken = JWT.decryptToken(response.body.token);
-
     const { email, username } = userLogin;
+    
     expect(decodedToken.id).toBeDefined();
     expect(decodedToken.email).toBe(email);
     expect(decodedToken.username).toBe(username);
@@ -33,7 +33,7 @@ describe('Em casos de erro', () => {
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('"user" is required');
+      expect(response.body.message.includes('user should not be null or undefined')).toBeTruthy();
     });
 
     it('Caso não passe o campo "password", testa se retorna o status e a mensagem correta', async () => {
@@ -43,7 +43,7 @@ describe('Em casos de erro', () => {
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('"password" is required');
+      expect(response.body.message.includes('password should not be null or undefined')).toBeTruthy();
     });
   });
 
@@ -56,18 +56,18 @@ describe('Em casos de erro', () => {
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('"user" is not allowed to be empty');
+      expect(response.body.message.includes('user should not be empty')).toBeTruthy();
     });
 
-    it('Caso o campo "user" esteja vazio, testa se retorna o status e a mensagem correta', async () => {
+    it('Caso o campo "password" esteja vazio, testa se retorna o status e a mensagem correta', async () => {
       const response = await app.post('/login').send({
         user: 'usuario',
         password: ''
       });
 
       expect(response.status).toBe(400);
-      expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('"password" is not allowed to be empty');
+      expect(response.body.message).toBeDefined();      
+      expect(response.body.message.includes('password should not be empty')).toBeTruthy();
     });
   });
 
@@ -78,9 +78,9 @@ describe('Em casos de erro', () => {
         password: 'teste'
       });
 
-      expect(response.status).toBe(404);
+      expect(response.status).toBe(401);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('Incorret user or password');
+      expect(response.body.message).toBe('Incorrect user or password');
     });
 
     it('Testa se retorna o status e mensagem corretos, caso passe a senha errada', async () => {
@@ -89,9 +89,9 @@ describe('Em casos de erro', () => {
         password: 'senha_errada'
       });
 
-      expect(response.status).toBe(404);
+      expect(response.status).toBe(401);
       expect(response.body.message).toBeDefined();
-      expect(response.body.message).toBe('Incorret user or password');
+      expect(response.body.message).toBe('Incorrect user or password');
     });
   });
 });

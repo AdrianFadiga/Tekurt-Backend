@@ -22,6 +22,7 @@ export class LoginService {
 
   private async validatePass(password: string, passHash: string) {
     const isValidPassword = await bcrypt.compare(password, passHash);
+
     if (!isValidPassword) throw new UnauthorizedException(this.userNotFoundMessage);
   }
 
@@ -48,6 +49,6 @@ export class LoginService {
       username
     };
     const secret = this.config.get('JWT_SECRET');
-    return this.jwt.signAsync(payload, {expiresIn: '7d', secret: secret});
+    return this.jwt.signAsync({ data: payload }, {expiresIn: '7d', secret: secret});
   }
 }

@@ -20,14 +20,24 @@ let LoginService = class LoginService {
         this.LoginModel = LoginModel;
         this.jwt = jwt;
         this.config = config;
+        this.userNotFoundMessage = 'Incorrect user or password';
+    }
+    validateUserExists(user) {
+        if (!user)
+            throw new common_1.UnauthorizedException(this.userNotFoundMessage);
+    }
+    async validatePass(password, passHash) {
+        const isValidPassword = await bcrypt.compare(password, passHash);
+        if (!isValidPassword)
+            throw new common_1.UnauthorizedException(this.userNotFoundMessage);
+    }
+    async validateUser(user, password) {
+        this.validateUserExists(user);
+        await this.validatePass(password, user.password);
     }
     async signIn(user, password) {
         const userData = await this.LoginModel.signIn(user);
-        if (!userData)
-            throw new common_1.UnauthorizedException('Incorrect user or password');
-        const isValidPassword = await bcrypt.compare(password, userData.password);
-        if (!isValidPassword)
-            throw new common_1.UnauthorizedException('Incorrect user or password');
+        await this.validateUser(userData, password);
         const { email, id, username } = userData;
         const token = await this.signToken({ email, id, username });
         return token;
@@ -39,7 +49,7 @@ let LoginService = class LoginService {
             username
         };
         const secret = this.config.get('JWT_SECRET');
-        return this.jwt.signAsync(payload, { expiresIn: '7d', secret: secret });
+        return this.jwt.signAsync({ data: payload }, { expiresIn: '7d', secret: secret });
     }
 };
 LoginService = __decorate([

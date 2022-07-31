@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "jest --collectCoverage --testPathPattern=src/tests/unit",
-    "start:test": "PORT=3030 NODE_ENV=test DATABASE_URL=mysql://root:password@localhost:3306/tekurt_test?schema=public npm run start:dev",
+    "start:test": "PORT=3030 NODE_ENV=test npm run start:dev",
     "kill:test": "kill -9 $(lsof -t -i:3030) &> /dev/null",
-    "pretest": "(npm run kill:test && NODE_ENV=test npm run start:test) &",
-    "test": "npx -y wait-on -t 300000 http://localhost:3030 && NODE_ENV=test jest --testPathPattern=src/tests/integration --forceExit",
+    "pretest2": "(npm run kill:test && NODE_ENV=test npm run start:test) &",
+    "test": "jest --testPathPattern=src/tests/integration --forceExit",
     "posttest": "npm run kill:test",
     "build": "tsc",
     "prestart": "npm run build && npx prisma migrate dev",

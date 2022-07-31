@@ -15,11 +15,13 @@ class AuthDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsDefined)(),
     __metadata("design:type", String)
 ], AuthDto.prototype, "user", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsDefined)(),
     __metadata("design:type", String)
 ], AuthDto.prototype, "password", void 0);
 exports.AuthDto = AuthDto;
