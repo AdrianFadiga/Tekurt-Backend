@@ -31,13 +31,10 @@ let LoginService = class LoginService {
         if (!isValidPassword)
             throw new common_1.UnauthorizedException(this.userNotFoundMessage);
     }
-    async validateUser(user, password) {
-        this.validateUserExists(user);
-        await this.validatePass(password, user.password);
-    }
     async signIn(user, password) {
         const userData = await this.LoginModel.signIn(user);
-        await this.validateUser(userData, password);
+        this.validateUserExists(userData);
+        await this.validatePass(password, userData.password);
         const { email, id, username } = userData;
         const token = await this.signToken({ email, id, username });
         return token;

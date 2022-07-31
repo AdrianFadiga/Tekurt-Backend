@@ -10,7 +10,6 @@ export declare class LoginService {
     constructor(LoginModel: LoginModel, jwt: JwtService, config: ConfigService);
     private validateUserExists;
     private validatePass;
-    private validateUser;
     signIn(user: string, password: string): Promise<string>;
     signToken({ email, id, username }: TokenSign): Promise<string>;
 }

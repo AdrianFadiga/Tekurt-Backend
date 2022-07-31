@@ -26,15 +26,11 @@ export class LoginService {
     if (!isValidPassword) throw new UnauthorizedException(this.userNotFoundMessage);
   }
 
-  private async validateUser(user: IUserLogin | null, password: string) {
-    this.validateUserExists(user);
-    await this.validatePass(password, user.password);
-  }
-
   async signIn(user: string, password: string) {
     const userData = await this.LoginModel.signIn(user);
 
-    await this.validateUser(userData, password);
+    this.validateUserExists(userData);
+    await this.validatePass(password, userData.password);
 
     const { email, id, username } = userData;
     const token = await this.signToken({email, id, username});
