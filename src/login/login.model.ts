@@ -15,8 +15,7 @@ export class LoginModel {
         email: true,
         password: true
       }
-    });
-    console.log(userData);    
+    });   
   
     return userData;
   }

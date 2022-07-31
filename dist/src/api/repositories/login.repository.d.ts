@@ -3,9 +3,9 @@ export default class LoginRepository {
     private model;
     constructor(model: LoginModel);
     getByEmailOrUsername(user: string): Promise<{
-        id: string;
         username: string;
         email: string;
+        id: string;
         password: string;
     }>;
 }

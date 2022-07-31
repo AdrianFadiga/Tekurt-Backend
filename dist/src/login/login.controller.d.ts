@@ -1,12 +1,9 @@
 import { LoginService } from './login.service';
-import { AuthLogin } from './middlewares';
+import { AuthDto } from './dtos';
 export declare class LoginController {
     private loginService;
     constructor(loginService: LoginService);
-    signIn(body: AuthLogin): Promise<{
-        id: string;
-        username: string;
-        email: string;
-        password: string;
+    signIn(dto: AuthDto): Promise<{
+        token: string;
     }>;
 }

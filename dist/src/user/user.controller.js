@@ -8,32 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginModel = void 0;
+exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
-const database_service_1 = require("../database/database.service");
-let LoginModel = class LoginModel {
-    constructor(prisma) {
-        this.prisma = prisma;
-    }
-    async signIn(user) {
-        const userData = await this.prisma.user.findFirst({
-            where: {
-                OR: [{ email: user }, { username: user }]
-            },
-            select: {
-                username: true,
-                id: true,
-                email: true,
-                password: true
-            }
-        });
-        return userData;
+const passport_1 = require("@nestjs/passport");
+let UserController = class UserController {
+    getMe(req) {
+        return req.user;
     }
 };
-LoginModel = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [database_service_1.DatabaseService])
-], LoginModel);
-exports.LoginModel = LoginModel;
-//# sourceMappingURL=login.model.js.map
+__decorate([
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('daUmaOlhadaNaPastaLogin/Strategy')),
+    (0, common_1.Get)('me'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getMe", null);
+UserController = __decorate([
+    (0, common_1.Controller)('users')
+], UserController);
+exports.UserController = UserController;
+//# sourceMappingURL=user.controller.js.map

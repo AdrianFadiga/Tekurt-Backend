@@ -9,31 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginModel = void 0;
+exports.JwtStrategy = void 0;
 const common_1 = require("@nestjs/common");
-const database_service_1 = require("../database/database.service");
-let LoginModel = class LoginModel {
-    constructor(prisma) {
-        this.prisma = prisma;
-    }
-    async signIn(user) {
-        const userData = await this.prisma.user.findFirst({
-            where: {
-                OR: [{ email: user }, { username: user }]
-            },
-            select: {
-                username: true,
-                id: true,
-                email: true,
-                password: true
-            }
+const config_1 = require("@nestjs/config");
+const passport_1 = require("@nestjs/passport");
+const passport_jwt_1 = require("passport-jwt");
+let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'daUmaOlhadaNaPastaLogin/Strategy') {
+    constructor(config) {
+        super({
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            secretOrKey: config.get('JWT_SECRET'),
         });
-        return userData;
+        this.config = config;
+    }
+    validate(payload) {
+        return payload;
     }
 };
-LoginModel = __decorate([
+JwtStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [database_service_1.DatabaseService])
-], LoginModel);
-exports.LoginModel = LoginModel;
-//# sourceMappingURL=login.model.js.map
+    __metadata("design:paramtypes", [config_1.ConfigService])
+], JwtStrategy);
+exports.JwtStrategy = JwtStrategy;
+//# sourceMappingURL=jwt.strategy.js.map

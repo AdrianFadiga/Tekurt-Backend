@@ -12,17 +12,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginService = void 0;
 const common_1 = require("@nestjs/common");
 const login_model_1 = require("./login.model");
+const bcrypt = require("bcrypt");
+const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
 let LoginService = class LoginService {
-    constructor(LoginModel) {
+    constructor(LoginModel, jwt, config) {
         this.LoginModel = LoginModel;
+        this.jwt = jwt;
+        this.config = config;
     }
     async signIn(user, password) {
-        return this.LoginModel.signIn(user);
+        const userData = await this.LoginModel.signIn(user);
+        if (!userData)
+            throw new common_1.UnauthorizedException('Incorrect user or password');
+        const isValidPassword = await bcrypt.compare(password, userData.password);
+        if (!isValidPassword)
+            throw new common_1.UnauthorizedException('Incorrect user or password');
+        const { email, id, username } = userData;
+        const token = await this.signToken({ email, id, username });
+        return token;
+    }
+    async signToken({ email, id, username }) {
+        const payload = {
+            email,
+            id,
+            username
+        };
+        const secret = this.config.get('JWT_SECRET');
+        return this.jwt.signAsync(payload, { expiresIn: '7d', secret: secret });
     }
 };
 LoginService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [login_model_1.LoginModel])
+    __metadata("design:paramtypes", [login_model_1.LoginModel,
+        jwt_1.JwtService,
+        config_1.ConfigService])
 ], LoginService);
 exports.LoginService = LoginService;
 //# sourceMappingURL=login.service.js.map

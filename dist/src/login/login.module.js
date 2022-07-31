@@ -11,12 +11,15 @@ const common_1 = require("@nestjs/common");
 const login_service_1 = require("./login.service");
 const login_controller_1 = require("./login.controller");
 const login_model_1 = require("./login.model");
+const jwt_1 = require("@nestjs/jwt");
+const strategy_1 = require("./strategy");
 let LoginModule = class LoginModule {
 };
 LoginModule = __decorate([
     (0, common_1.Module)({
-        providers: [login_service_1.LoginService, login_model_1.LoginModel],
-        controllers: [login_controller_1.LoginController]
+        imports: [jwt_1.JwtModule.register({})],
+        providers: [login_service_1.LoginService, login_model_1.LoginModel, strategy_1.JwtStrategy],
+        controllers: [login_controller_1.LoginController],
     })
 ], LoginModule);
 exports.LoginModule = LoginModule;

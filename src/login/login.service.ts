@@ -16,8 +16,8 @@ export class LoginService {
   async signIn(user: string, password: string) {
     const userData = await this.LoginModel.signIn(user);
     if (!userData) throw new UnauthorizedException('Incorrect user or password');
-    // const isValidPassword = await bcrypt.compare(password, userData.password);
-    // if (!isValidPassword) throw new UnauthorizedException('Deu ruim com a senha');
+    const isValidPassword = await bcrypt.compare(password, userData.password);
+    if (!isValidPassword) throw new UnauthorizedException('Incorrect user or password');
     const { email, id, username } = userData;
     const token = await this.signToken({email, id, username});
     return token;
