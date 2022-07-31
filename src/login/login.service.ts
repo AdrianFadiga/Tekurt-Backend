@@ -5,13 +5,14 @@ import { JwtService } from '@nestjs/jwt';
 import TokenSign from 'src/types/TokenSign';
 import { ConfigService } from '@nestjs/config';
 
-
-
 @Injectable()
 export class LoginService {
-  constructor(private LoginModel: LoginModel, 
+  constructor(
+    private LoginModel: LoginModel, 
     private jwt: JwtService, 
-    private config: ConfigService) {}
+    private config: ConfigService
+  ) {}
+
   async signIn(user: string, password: string) {
     const userData = await this.LoginModel.signIn(user);
     if (!userData) throw new UnauthorizedException('Incorrect user or password');
