@@ -28,12 +28,6 @@ export class UserController {
     return users;
   }
 
-  // @Post()
-  // async create(@Body() dto: UserDto) {
-  //   await this.userService.create(dto);
-  //   return {message: 'Created'};
-  // }
-
   // Verificar como fazer para não precisar atualizar ou enviar o password 
   // no req.body na hora do put
   // para aproveitar o UserDto

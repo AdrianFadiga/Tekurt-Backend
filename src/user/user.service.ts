@@ -25,17 +25,6 @@ export class UserService {
     await this.userModel.update(id, dto);
   }
 
-  // async verifyEmailInUse(email: string) {
-  //   const user = await this.userModel.findByEmail(email);
-  //   if (user) throw new ConflictException();
-  // }
-
-  // async create(dto: UserDto) {
-  //   const { email } = dto;
-  //   await this.verifyEmailInUse(email);
-  //   await this.userModel.create(dto);
-  // }
-
   async delete(id: string) {
     await this.readOne(id);
     await this.userModel.delete(id);

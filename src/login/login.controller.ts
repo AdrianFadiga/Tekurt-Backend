@@ -4,7 +4,7 @@ import { AuthDto } from './dtos';
 import { UserDto } from 'src/user/dtos';
 
 
-@Controller()
+@Controller('auth')
 export class LoginController {
   constructor(private loginService: LoginService) {}
 

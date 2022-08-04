@@ -21,19 +21,6 @@ export class UserModel {
     return user;
   }
 
-  // async findByEmail(email: string) {
-  //   const user = await this.database.user.findFirst({
-  //     where: {email}
-  //   });
-  //   return user;
-  // }
-
-  // async create(dto: UserDto) {
-  //   await this.database.user.create({
-  //     data: {...dto},
-  //   });
-  // }
-
   async update(id: string, dto: UserDto) {
     await this.database.user.update({
       where: {id},
