@@ -30,9 +30,7 @@ export class LoginService {
     const userData = await this.LoginModel.signIn(user);
     
     this.validateUserExists(userData);
-    // Tive que comentar a função pq na hora de criar usuário
-    // A senha não vai criptografada pro banco;
-    // await this.validatePass(password, userData.password);
+    await this.validatePass(password, userData.password);
 
     const { email, id, username } = userData;
     const token = await this.signToken({email, id, username});
@@ -47,6 +45,7 @@ export class LoginService {
 
   async create(dto: UserDto) {
     await this.verifyEmailInUse(dto.email);
+    dto.password = await bcrypt.hash(dto.password, 10);
     const newUser = await this.LoginModel.create(dto);
     const { email, id, username } = newUser;
     const token = await this.signToken({email, id, username});

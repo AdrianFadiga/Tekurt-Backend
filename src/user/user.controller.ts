@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/login/decorator/get-user.decorator';
 import { JwtGuard } from 'src/login/guard';
