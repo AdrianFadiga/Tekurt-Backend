@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
+import { UserDto } from 'src/user/dtos';
 
 @Injectable()
 export class LoginModel {
-  constructor(private prisma: DatabaseService) {}
+  constructor(private database: DatabaseService) {}
   async signIn(user: string) {
-    const userData = await this.prisma.user.findFirst({
+    const userData = await this.database.user.findFirst({
       where: {
         OR: [{ email: user }, { username: user }]
       },
@@ -18,5 +19,18 @@ export class LoginModel {
     });   
   
     return userData;
+  }
+  async findByEmail(email: string) {
+    const user = await this.database.user.findFirst({
+      where: {email}
+    });
+    return user;
+  }
+
+  async create(dto: UserDto) {
+    const newUser = await this.database.user.create({
+      data: {...dto},
+    });
+    return newUser;
   }
 }

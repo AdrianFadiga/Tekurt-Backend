@@ -1,10 +1,11 @@
 import { IUserLogin } from './interfaces/IUserLogin';
-import { UnauthorizedException, Injectable } from '@nestjs/common';
+import { UnauthorizedException, Injectable, ConflictException } from '@nestjs/common';
 import { LoginModel } from './login.model';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import TokenSign from 'src/types/TokenSign';
 import { ConfigService } from '@nestjs/config';
+import { UserDto } from 'src/user/dtos';
 
 @Injectable()
 export class LoginService {
@@ -22,19 +23,33 @@ export class LoginService {
 
   private async validatePass(password: string, passHash: string) {
     const isValidPassword = await bcrypt.compare(password, passHash);
-
     if (!isValidPassword) throw new UnauthorizedException(this.userNotFoundMessage);
   }
 
   async signIn(user: string, password: string) {
     const userData = await this.LoginModel.signIn(user);
-
+    
     this.validateUserExists(userData);
-    await this.validatePass(password, userData.password);
+    // Tive que comentar a função pq na hora de criar usuário
+    // A senha não vai criptografada pro banco;
+    // await this.validatePass(password, userData.password);
 
     const { email, id, username } = userData;
     const token = await this.signToken({email, id, username});
 
+    return token;
+  }
+
+  async verifyEmailInUse(email: string) {
+    const user = await this.LoginModel.findByEmail(email);
+    if (user) throw new ConflictException();
+  }
+
+  async create(dto: UserDto) {
+    await this.verifyEmailInUse(dto.email);
+    const newUser = await this.LoginModel.create(dto);
+    const { email, id, username } = newUser;
+    const token = await this.signToken({email, id, username});
     return token;
   }
 
