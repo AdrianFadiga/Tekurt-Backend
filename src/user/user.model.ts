@@ -17,7 +17,7 @@ export class UserModel {
     const user = await this.database.user.findUnique({
       where: {id}
     });
-    if (user) delete user.password; 
+    delete user?.password; 
     return user;
   }
 
