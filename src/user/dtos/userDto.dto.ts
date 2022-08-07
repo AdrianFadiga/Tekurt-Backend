@@ -22,6 +22,8 @@ export class UserDto {
   @MaxLength(30)
   lastName: string;
 
+  // retirar a senha para o front nao ter q passar pela requisição
+  // fazer uma rota só para att a senha
   @IsString()
   @IsNotEmpty()
   @IsDefined()

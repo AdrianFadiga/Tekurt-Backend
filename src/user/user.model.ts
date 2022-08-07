@@ -20,7 +20,7 @@ export class UserModel {
     return user;
   }
 
-  async update(id: string, dto: UserDto) {
+  async update(id: string, dto: Omit<UserDto, 'password'>) {
     await this.database.user.update({
       where: { id },
       data: { ...dto },

@@ -33,10 +33,11 @@ export class UserController {
     return this.userService.read();
   }
 
+  // fazer uma rota só para att a senha
   @Put('/:id')
   async update(
     @GetUser() user: User,
-    @Body() dto: UserDto,
+    @Body() dto: Omit<UserDto, 'password'>,
     @Param('id') paramId: string,
   ) {
     const { id } = user;

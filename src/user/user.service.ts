@@ -30,7 +30,7 @@ export class UserService {
     if (userId !== paramId) throw new UnauthorizedException();
   }
 
-  async update(id: string, paramId: string, dto: UserDto) {
+  async update(id: string, paramId: string, dto: Omit<UserDto, 'password'>) {
     this.validateUser(id, paramId);
     await this.userModel.update(id, dto);
   }
