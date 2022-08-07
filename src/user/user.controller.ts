@@ -11,6 +11,7 @@ import {
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
+import { passwordDto } from './dtos/passwordDto.dto';
 import { UserDto } from './dtos/userDto.dto';
 import { UserService } from './user.service';
 
@@ -46,7 +47,7 @@ export class UserController {
   @Patch('/:id')
   async updatePassword(
     @GetUser() { id }: User,
-    @Body('password') password: string,
+    @Body() { password }: passwordDto,
     @Param('id') paramId: string,
   ) {
     return this.userService.updatePassword(id, password, paramId);

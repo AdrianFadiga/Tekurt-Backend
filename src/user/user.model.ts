@@ -27,7 +27,7 @@ export class UserModel {
     });
   }
 
-  async updatePassword(id: string, password: string) {
+  async updatePassword(id: string, password: any) {
     await this.database.user.update({
       where: { id },
       data: { password },

@@ -36,7 +36,7 @@ export class UserService {
     await this.userModel.update(id, dto);
   }
 
-  async updatePassword(id: string, password: string, paramId: string) {
+  async updatePassword(id: string, password: any, paramId: string) {
     this.validateUser(id, paramId);
     const cryptoPassword = await bcrypt.hash(password, 10);
     await this.userModel.updatePassword(id, cryptoPassword);
