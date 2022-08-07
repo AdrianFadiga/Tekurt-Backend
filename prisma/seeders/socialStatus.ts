@@ -1,11 +1,19 @@
 import { prisma } from '../prismaClient';
 
 async function main() {
-  const socialStatus = ['Solteiro(a)', 'Namorando', 'Noivo(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Enrolado(a)'];
+  const socialStatus = [
+    'Solteiro(a)',
+    'Namorando',
+    'Noivo(a)',
+    'Casado(a)',
+    'Divorciado(a)',
+    'Viúvo(a)',
+    'Enrolado(a)',
+  ];
 
   for (const status of socialStatus) {
     await prisma.socialStatus.create({
-      data: { status }
+      data: { status },
     });
   }
 }

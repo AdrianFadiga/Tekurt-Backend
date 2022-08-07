@@ -1,11 +1,26 @@
 import { prisma } from '../prismaClient';
 
 async function main() {
-  const signs = ['Áries', 'Touro', 'Gêmeos', 'Câncer', 'Leão', 'Virgem', 'Libra', 'Escorpião', 'Sagitário', 'Capricórnio', 'Aquário', 'Peixes', 'Nenhum', 'Prefiro não informar'];
+  const signs = [
+    'Áries',
+    'Touro',
+    'Gêmeos',
+    'Câncer',
+    'Leão',
+    'Virgem',
+    'Libra',
+    'Escorpião',
+    'Sagitário',
+    'Capricórnio',
+    'Aquário',
+    'Peixes',
+    'Nenhum',
+    'Prefiro não informar',
+  ];
 
   for (const sign of signs) {
     await prisma.sign.create({
-      data: { sign }
+      data: { sign },
     });
   }
 }

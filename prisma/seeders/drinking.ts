@@ -5,7 +5,7 @@ async function main() {
 
   for (const option of options) {
     await prisma.drinking.create({
-      data: { option }
+      data: { option },
     });
   }
 }
