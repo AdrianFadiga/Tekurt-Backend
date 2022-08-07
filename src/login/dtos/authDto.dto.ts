@@ -1,12 +1,11 @@
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import { IsDefined, IsNotEmpty } from 'class-validator';
 
 export class AuthDto {
   @IsNotEmpty()
   @IsDefined()
-    user: string;
+  user: string;
 
-  @IsString()
   @IsNotEmpty()
   @IsDefined()
-    password: string;
+  password: string;
 }
