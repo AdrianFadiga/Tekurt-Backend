@@ -1,11 +1,14 @@
 import { DatabaseService } from 'src/database/database.service';
+import { UserDto } from 'src/user/dtos';
 export declare class LoginModel {
-    private prisma;
-    constructor(prisma: DatabaseService);
+    private database;
+    constructor(database: DatabaseService);
     signIn(user: string): Promise<{
+        id: string;
         username: string;
         email: string;
-        id: string;
         password: string;
     }>;
+    findByEmail(email: string): Promise<import(".prisma/client").User>;
+    create(dto: UserDto): Promise<import(".prisma/client").User>;
 }

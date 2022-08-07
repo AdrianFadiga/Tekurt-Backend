@@ -13,11 +13,11 @@ exports.LoginModel = void 0;
 const common_1 = require("@nestjs/common");
 const database_service_1 = require("../database/database.service");
 let LoginModel = class LoginModel {
-    constructor(prisma) {
-        this.prisma = prisma;
+    constructor(database) {
+        this.database = database;
     }
     async signIn(user) {
-        const userData = await this.prisma.user.findFirst({
+        const userData = await this.database.user.findFirst({
             where: {
                 OR: [{ email: user }, { username: user }]
             },
@@ -29,6 +29,18 @@ let LoginModel = class LoginModel {
             }
         });
         return userData;
+    }
+    async findByEmail(email) {
+        const user = await this.database.user.findFirst({
+            where: { email }
+        });
+        return user;
+    }
+    async create(dto) {
+        const newUser = await this.database.user.create({
+            data: Object.assign({}, dto),
+        });
+        return newUser;
     }
 };
 LoginModel = __decorate([

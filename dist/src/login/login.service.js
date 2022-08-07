@@ -39,6 +39,19 @@ let LoginService = class LoginService {
         const token = await this.signToken({ email, id, username });
         return token;
     }
+    async verifyEmailInUse(email) {
+        const user = await this.LoginModel.findByEmail(email);
+        if (user)
+            throw new common_1.ConflictException();
+    }
+    async create(dto) {
+        await this.verifyEmailInUse(dto.email);
+        dto.password = await bcrypt.hash(dto.password, 10);
+        const newUser = await this.LoginModel.create(dto);
+        const { email, id, username } = newUser;
+        const token = await this.signToken({ email, id, username });
+        return token;
+    }
     async signToken({ email, id, username }) {
         const payload = {
             email,

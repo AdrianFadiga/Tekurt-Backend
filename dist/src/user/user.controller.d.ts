@@ -1,5 +1,16 @@
-/// <reference types="passport" />
-import { Request } from 'express';
+import { User } from '@prisma/client';
+import { UserDto } from './dtos/userDto.dto';
+import { UserService } from './user.service';
 export declare class UserController {
-    getMe(req: Request): Express.User;
+    private userService;
+    constructor(userService: UserService);
+    getMe(user: User): User;
+    readOne(id: string): Promise<User>;
+    read(): Promise<User[]>;
+    update(dto: UserDto, user: User, paramId: string): Promise<{
+        message: string;
+    }>;
+    delete(user: User, paramId: string): Promise<{
+        message: string;
+    }>;
 }

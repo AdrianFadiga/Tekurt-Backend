@@ -16,6 +16,7 @@ exports.LoginController = void 0;
 const common_1 = require("@nestjs/common");
 const login_service_1 = require("./login.service");
 const dtos_1 = require("./dtos");
+const dtos_2 = require("../user/dtos");
 let LoginController = class LoginController {
     constructor(loginService) {
         this.loginService = loginService;
@@ -25,17 +26,29 @@ let LoginController = class LoginController {
         const token = await this.loginService.signIn(user, password);
         return { token };
     }
+    async create(dto) {
+        const token = await this.loginService.create(dto);
+        return { message: 'Created',
+            token };
+    }
 };
 __decorate([
-    (0, common_1.Post)(''),
+    (0, common_1.Post)('/signin'),
     (0, common_1.HttpCode)(200),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dtos_1.AuthDto]),
     __metadata("design:returntype", Promise)
 ], LoginController.prototype, "signIn", null);
+__decorate([
+    (0, common_1.Post)('/signup'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dtos_2.UserDto]),
+    __metadata("design:returntype", Promise)
+], LoginController.prototype, "create", null);
 LoginController = __decorate([
-    (0, common_1.Controller)('login'),
+    (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [login_service_1.LoginService])
 ], LoginController);
 exports.LoginController = LoginController;
