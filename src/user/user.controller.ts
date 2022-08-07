@@ -11,8 +11,7 @@ import {
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
-import { passwordDto } from './dtos/passwordDto.dto';
-import { UserDto } from './dtos/userDto.dto';
+import { passwordDto, UserDto } from './dtos';
 import { UserService } from './user.service';
 
 @UseGuards(JwtGuard)
