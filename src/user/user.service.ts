@@ -6,6 +6,7 @@ import {
 import { excludeField } from '../utils/excludeField';
 import { UserDto } from './dtos';
 import { UserModel } from './user.model';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -33,6 +34,12 @@ export class UserService {
   async update(id: string, paramId: string, dto: Omit<UserDto, 'password'>) {
     this.validateUser(id, paramId);
     await this.userModel.update(id, dto);
+  }
+
+  async updatePassword(id: string, password: string, paramId: string) {
+    this.validateUser(id, paramId);
+    const cryptoPassword = await bcrypt.hash(password, 10);
+    await this.userModel.updatePassword(id, cryptoPassword);
   }
 
   async delete(id: string, paramId: string) {

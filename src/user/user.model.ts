@@ -27,6 +27,13 @@ export class UserModel {
     });
   }
 
+  async updatePassword(id: string, password: string) {
+    await this.database.user.update({
+      where: { id },
+      data: { password },
+    });
+  }
+
   async delete(id: string) {
     await this.database.user.delete({
       where: { id },

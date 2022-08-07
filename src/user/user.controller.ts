@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Put,
   UseGuards,
 } from '@nestjs/common';
@@ -33,15 +34,22 @@ export class UserController {
     return this.userService.read();
   }
 
-  // fazer uma rota só para att a senha
   @Put('/:id')
   async update(
-    @GetUser() user: User,
+    @GetUser() { id }: User,
     @Body() dto: Omit<UserDto, 'password'>,
     @Param('id') paramId: string,
   ) {
-    const { id } = user;
     return this.userService.update(id, paramId, dto);
+  }
+
+  @Patch('/:id')
+  async updatePassword(
+    @GetUser() { id }: User,
+    @Body('password') password: string,
+    @Param('id') paramId: string,
+  ) {
+    return this.userService.updatePassword(id, password, paramId);
   }
 
   @Delete('/:id')

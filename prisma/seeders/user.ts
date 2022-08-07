@@ -3,6 +3,7 @@ import { prisma } from '../prismaClient';
 async function main() {
   await prisma.user.create({
     data: {
+      id: '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37',
       firstName: 'nome',
       lastName: 'sobrenome',
       username: 'usuario',
