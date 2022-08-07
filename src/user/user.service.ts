@@ -1,3 +1,4 @@
+import { excludeField } from 'src/utils/excludeField';
 import {
   Injectable,
   NotFoundException,
@@ -12,12 +13,15 @@ export class UserService {
 
   async read() {
     const users = await this.userModel.read();
+    users.map((user) => excludeField(user, 'password'));
+
     return users;
   }
 
   async readOne(id: string) {
     const user = await this.userModel.readOne(id);
     if (!user) throw new NotFoundException();
+    excludeField(user, 'password');
 
     return user;
   }
