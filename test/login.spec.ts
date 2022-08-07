@@ -14,6 +14,7 @@ import {
   UserEmpty,
   UserUndefined,
 } from './responses/errors';
+import { UserDto } from '../src/user/dtos';
 
 describe('Testes da rota Login', () => {
   let app: INestApplication;
@@ -58,26 +59,6 @@ describe('Testes da rota Login', () => {
 
   describe('Em casos de sucesso', () => {
     describe('Signin', () => {
-      // it('should throw if email is empty', () => {
-      //   return pactum
-      //     .spec()
-      //     .post(`/auth/signup`)
-      //     .withBody({ password: dto.password })
-      //     .expectStatus(400);
-      // });
-
-      // it('should throw if password is empty', () => {
-      //   return pactum
-      //     .spec()
-      //     .post(`/auth/signup`)
-      //     .withBody({ email: dto.user })
-      //     .expectStatus(400);
-      // });
-
-      // it('should throw if no body provided', () => {
-      //   return pactum.spec().post(`/auth/signup`).expectStatus(400);
-      // });
-
       it('Testa se retorna o token e status correto', () => {
         return pactum
           .spec()
