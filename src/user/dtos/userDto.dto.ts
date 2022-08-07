@@ -1,56 +1,65 @@
-import { IsDefined, IsEmail, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
+import {
+  IsDefined,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
-export class UserDto {  
+export class UserDto {
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
-    firstName: string;
+  firstName: string;
 
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
-    lastName: string;
+  lastName: string;
 
   @IsString()
   @IsNotEmpty()
   @IsDefined()
   @MinLength(6)
   @MaxLength(20)
-    password: string;
+  password: string;
 
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
-    username: string;
+  username: string;
 
   @IsEmail()
   @IsNotEmpty()
   @IsDefined()
   @MaxLength(30)
-    email: string;
+  email: string;
 
   @IsOptional()
   @IsUrl()
-    imageUrl: string;
+  imageUrl: string;
 
   @IsOptional()
-    socialStatusId: string;
+  socialStatusId: string;
 
   @IsOptional()
-    children: boolean;
+  children: boolean;
 
   @IsOptional()
-    smokes: boolean;
+  smokes: boolean;
 
   @IsOptional()
-    drinkingId: string;
+  drinkingId: string;
 
   @IsOptional()
-    signId: string;
-    
+  signId: string;
+
   @IsOptional()
-    biography: string;
+  biography: string;
 }

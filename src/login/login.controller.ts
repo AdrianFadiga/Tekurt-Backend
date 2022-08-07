@@ -3,24 +3,18 @@ import { LoginService } from './login.service';
 import { AuthDto } from './dtos';
 import { UserDto } from 'src/user/dtos';
 
-
 @Controller('auth')
 export class LoginController {
   constructor(private loginService: LoginService) {}
 
   @Post('/signin')
   @HttpCode(200)
-  async signIn(@Body() dto: AuthDto) {
-    const { user, password } = dto;
-    const token = await this.loginService.signIn(user, password);
-
-    return {token};
+  signIn(@Body() dto: AuthDto) {
+    return this.loginService.signIn(dto);
   }
 
   @Post('/signup')
-  async create(@Body() dto: UserDto) {
-    const token = await this.loginService.create(dto);
-    return {message: 'Created',
-      token};
+  create(@Body() dto: UserDto) {
+    return this.loginService.create(dto);
   }
 }
