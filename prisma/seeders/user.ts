@@ -8,6 +8,7 @@ async function main() {
       username: 'usuario',
       email: 'teste@teste.com',
       password: '$2b$08$YqzWMbcBWAJwwm/djC2njelPHJxzDtb9d17rUfQFUxoKVoOmrTMkC',
+      // teste
       imageUrl: 'url_imagem',
       biography: 'biografia',
     },
