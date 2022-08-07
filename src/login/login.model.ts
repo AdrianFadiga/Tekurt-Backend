@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { DatabaseService } from 'src/database/database.service';
-import { UserDto } from 'src/user/dtos';
+import { DatabaseService } from '../database/database.service';
+import { UserDto } from '../user/dtos';
 
 @Injectable()
 export class LoginModel {

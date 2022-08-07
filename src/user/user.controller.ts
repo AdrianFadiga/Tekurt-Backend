@@ -8,8 +8,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { GetUser } from 'src/login/decorator/get-user.decorator';
-import { JwtGuard } from 'src/login/guard';
+import { GetUser } from '../login/decorator';
+import { JwtGuard } from '../login/guard';
 import { UserDto } from './dtos/userDto.dto';
 import { UserService } from './user.service';
 

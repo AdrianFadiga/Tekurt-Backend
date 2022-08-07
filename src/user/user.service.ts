@@ -1,9 +1,9 @@
-import { excludeField } from 'src/utils/excludeField';
 import {
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { excludeField } from '../utils/excludeField';
 import { UserDto } from './dtos';
 import { UserModel } from './user.model';
 
