@@ -130,6 +130,7 @@ Em caso de falha:
 - Retornará uma mensagem de erro.
 
 #### DELETE ._url/users/:id – delete
+
 Esta rota deve deletar o usuário.
 
 Ao acessar esta rota, será validado:
@@ -144,3 +145,25 @@ Em caso de sucesso:
 - Retorna uma resposta com o status ok
 Em caso de falha:
 - Retorna mensagem de erro
+
+#### PATCH ._url/users/:id - update Password
+
+Esta rota deve atualizar a senha do usuário.
+Esta rota deve receber o req.body no seguinte formato:
+{
+    "password": "novaSenha"
+}
+Ao acessar esta rota, será validado:
+
+- Se o Token informado é válido;
+- Se o corpo da requisição foi preenchido novamente;
+- Se o id do usuário que está sendo modificado é o mesmo id do usuário logado no sistema;
+
+Em caso de sucesso:
+
+- A senha do usuário é modificada;
+- Retorna o status ok;
+
+Em caso de falha:
+
+- Retorna uma mensagem de erro;
