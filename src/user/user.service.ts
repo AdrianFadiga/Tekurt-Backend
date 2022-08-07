@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserDto } from './dtos';
 import { UserModel } from './user.model';
 
@@ -14,18 +18,21 @@ export class UserService {
   async readOne(id: string) {
     const user = await this.userModel.readOne(id);
     if (!user) throw new NotFoundException();
+
     return user;
   }
 
-  async validateUser(userId: string, paramId: string) {
+  private validateUser(userId: string, paramId: string) {
     if (userId !== paramId) throw new UnauthorizedException();
   }
 
-  async update(id: string, dto: UserDto) {
+  async update(id: string, paramId: string, dto: UserDto) {
+    this.validateUser(id, paramId);
     await this.userModel.update(id, dto);
   }
 
-  async delete(id: string) {
+  async delete(id: string, paramId: string) {
+    this.validateUser(id, paramId);
     await this.readOne(id);
     await this.userModel.delete(id);
   }
