@@ -1,9 +1,10 @@
 # backend-secret
 
-### Executar testes de integração
-- ``docker exec -it secret_api bash``
-- ``npm run start:test`` ou ``PORT=3030 NODE_ENV=test npm run start:dev``
-- Em outro terminal ``docker exec -it secret_api bash``
-- ``npm test``
+### Executar testes E2E
+- Primeiro, certifique se de que os containers estão de pé, para executar os testes. Caso não, execute:
+  ``docker-compose up``
 
-Esses comandos executaram os testes de integração na PORTA 3030 e criará um banco de dados apenas para teste, sem que afete o banco de desenvolvimento ou produção
+- Depois execute os testes: 
+  ``npm run test:e2e``
+
+Esses comandos executaram os testes na PORTA 3001, e criará um banco apenas para teste a porta 3307, sem que afete o banco de desenvolvimento ou produção
