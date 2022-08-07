@@ -5,32 +5,38 @@ import { UserDto } from 'src/user/dtos';
 @Injectable()
 export class LoginModel {
   constructor(private database: DatabaseService) {}
+
   async signIn(user: string) {
     const userData = await this.database.user.findFirst({
       where: {
-        OR: [{ email: user }, { username: user }]
+        OR: [{ email: user }, { username: user }],
       },
       select: {
         username: true,
         id: true,
         email: true,
-        password: true
-      }
-    });   
-  
+        password: true,
+      },
+    });
+
     return userData;
   }
-  async findByEmail(email: string) {
+
+  async findByEmailOrUsername(email: string, username: string) {
     const user = await this.database.user.findFirst({
-      where: {email}
+      where: {
+        OR: [{ email }, { username }],
+      },
     });
+
     return user;
   }
 
   async create(dto: UserDto) {
     const newUser = await this.database.user.create({
-      data: {...dto},
+      data: { ...dto },
     });
+
     return newUser;
   }
 }
