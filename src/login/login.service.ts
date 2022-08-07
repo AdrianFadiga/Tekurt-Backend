@@ -5,12 +5,12 @@ import {
   ConflictException,
   ForbiddenException,
 } from '@nestjs/common';
-import { LoginModel } from './login.model';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { TokenSign } from './interfaces/TokenSign';
 import { UserDto } from '../user/dtos';
+import { LoginModel } from './login.model';
 
 @Injectable()
 export class LoginService {
@@ -45,7 +45,6 @@ export class LoginService {
 
   async verifyEmailInUse(email: string, username: string) {
     const user = await this.LoginModel.findByEmailOrUsername(email, username);
-    // alterar o cod para 422? 403 é para put
     if (user) throw new ConflictException();
   }
 
