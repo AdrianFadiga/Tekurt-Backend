@@ -7,7 +7,7 @@ async function main() {
       lastName: 'sobrenome',
       username: 'usuario',
       email: 'teste@teste.com',
-      hash: '$2b$08$YqzWMbcBWAJwwm/djC2njelPHJxzDtb9d17rUfQFUxoKVoOmrTMkC',
+      password: '$2b$08$YqzWMbcBWAJwwm/djC2njelPHJxzDtb9d17rUfQFUxoKVoOmrTMkC',
       imageUrl: 'url_imagem',
       biography: 'biografia',
     },
