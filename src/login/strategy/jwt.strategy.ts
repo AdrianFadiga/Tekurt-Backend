@@ -22,7 +22,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       },
     });
 
-    excludeField(user, 'password');
+    // Tive que colocar esse if pq se não quebrava a aplicação qdo resetava o banco
+    // Se utilizasse um token antigo
+    if (user) excludeField(user, 'password');
 
     return user;
   }

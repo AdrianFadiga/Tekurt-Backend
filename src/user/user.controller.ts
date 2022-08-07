@@ -18,14 +18,14 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('me')
+  @Get('/me')
   getMe(@GetUser() user: User) {
     return user;
   }
 
-  @Get('/:id')
-  readOne(@Param('id') id: string) {
-    return this.userService.readOne(id);
+  @Get('/:username')
+  readOne(@Param('username') username: string) {
+    return this.userService.readOne(username);
   }
 
   @Get()

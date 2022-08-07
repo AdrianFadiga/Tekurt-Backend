@@ -63,5 +63,6 @@ export class UserDto {
   signId: string;
 
   @IsOptional()
+  @MaxLength(500)
   biography: string;
 }

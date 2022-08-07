@@ -12,9 +12,9 @@ export class UserModel {
     return users;
   }
 
-  async readOne(id: string) {
+  async readOne(username: string) {
     const user = await this.database.user.findUnique({
-      where: { id },
+      where: { username },
     });
 
     return user;

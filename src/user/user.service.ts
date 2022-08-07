@@ -18,8 +18,8 @@ export class UserService {
     return users;
   }
 
-  async readOne(id: string) {
-    const user = await this.userModel.readOne(id);
+  async readOne(username: string) {
+    const user = await this.userModel.readOne(username);
     if (!user) throw new NotFoundException();
     excludeField(user, 'password');
 
@@ -37,7 +37,6 @@ export class UserService {
 
   async delete(id: string, paramId: string) {
     this.validateUser(id, paramId);
-    await this.readOne(id);
     await this.userModel.delete(id);
   }
 }
