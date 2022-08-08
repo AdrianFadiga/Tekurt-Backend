@@ -20,6 +20,14 @@ export class UserModel {
     return user;
   }
 
+  async findById(id: string) {
+    const user = await this.database.user.findUnique({
+      where: { id },
+    });
+
+    return user;
+  }
+
   async update(id: string, dto: Omit<UserDto, 'password'>) {
     await this.database.user.update({
       where: { id },

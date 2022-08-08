@@ -20,6 +20,8 @@ Entretanto, caso o usuário deseje testar as rotas desenvolvidas no Back End da 
 #### _.url/auth/signup - Rota de criação do usuário:
 
 A requisição deve receber um req.body no seguinte modelo:
+
+```json
 {
 "firstName": "nomeDoUsuario",
 "lastName": "sobrenomeDoUsuario",
@@ -27,6 +29,7 @@ A requisição deve receber um req.body no seguinte modelo:
 "username": "identificadorDoUsuario",
 "email": "email@email.com"
 }
+```
 
 Ao fazer a requisição, será validado:
 
@@ -47,10 +50,12 @@ Em caso de falha:
 
 A requisição deve receber um req.body no seguinte modelo:
 
+```json
 {
 "user": "email@email.com ou username",
 "password": "senhaDoUsuario"
 }
+```
 
 Ao acessar esta rota, será validado:
 
@@ -69,10 +74,11 @@ Em caso de falha:
 ### Rota de usuário (users)
 
 Todas as requisições feitas para a rota de usuários devem conter o req.headers no seguinte formato:
-
+```json
 {
     Authorization: "Bearer <Token>"
 }
+```
 
 #### GET _.url/users - Rota read
 Esta rota retorna a lista de todos os usuários cadastrados.
@@ -100,6 +106,8 @@ Em caso de falha:
 Esta rota deve atualizar os dados do usuário cadastrado.
 
 Esta rota deve receber o seguinte req.body:
+
+```json
 {
 “firstName”: “nome”,
 “lastName”: “sobrenome”,
@@ -113,6 +121,7 @@ Esta rota deve receber o seguinte req.body:
 “signId”: “signId” (opcional),
 “biography”: “biografia” (opcional)
 }
+```
 
 Ao acessar esta rota, será validado:
 
@@ -150,9 +159,11 @@ Em caso de falha:
 
 Esta rota deve atualizar a senha do usuário.
 Esta rota deve receber o req.body no seguinte formato:
+```json
 {
     "password": "novaSenha"
 }
+```
 Ao acessar esta rota, será validado:
 
 - Se o Token informado é válido;

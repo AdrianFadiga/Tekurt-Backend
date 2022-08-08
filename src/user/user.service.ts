@@ -27,6 +27,13 @@ export class UserService {
     return user;
   }
 
+  async findById(id: string) {
+    const user = await this.userModel.findById(id);
+    if (!user) throw new NotFoundException();
+    excludeField(user, 'password');
+    return user;
+  }
+
   private validateUser(userId: string, paramId: string) {
     if (userId !== paramId) throw new UnauthorizedException();
   }
