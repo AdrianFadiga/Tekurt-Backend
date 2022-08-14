@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginController } from '../login.controller';
 import { LoginService } from '../login.service';
-import { loginUser, token } from './mocks';
+import { createUser, loginUser, token } from './mocks';
 
 describe('LoginController', () => {
   let loginController: LoginController;
@@ -15,7 +15,7 @@ describe('LoginController', () => {
           provide: LoginService,
           useValue: {
             signIn: jest.fn().mockResolvedValue(token),
-            create: jest.fn(),
+            create: jest.fn().mockResolvedValue(token),
           },
         },
       ],
@@ -35,6 +35,15 @@ describe('LoginController', () => {
       const result = await loginController.signIn(loginUser);
 
       expect(loginService.signIn).toHaveBeenCalledTimes(1);
+      expect(result).toEqual(token);
+    });
+  });
+
+  describe('Create', () => {
+    it('Deve retornar um token na "access_controll"', async () => {
+      const result = await loginController.create(createUser);
+
+      expect(loginService.create).toHaveBeenCalledTimes(1);
       expect(result).toEqual(token);
     });
   });
