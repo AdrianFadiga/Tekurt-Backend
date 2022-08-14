@@ -45,6 +45,7 @@ export class LoginService {
 
   async verifyEmailInUse(email: string, username: string) {
     const user = await this.LoginModel.findByEmailOrUsername(email, username);
+
     if (user) throw new ConflictException();
   }
 

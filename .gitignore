@@ -21,6 +21,10 @@ lerna-debug.log*
 
 # Tests
 /coverage
+<<<<<<< HEAD
+/build
+dist/
+=======
 /.nyc_output
 
 # IDEs and editors
@@ -39,3 +43,4 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 node_modules
+>>>>>>> 7c00ed8bc5c6727f98ef371fe09088a7735afb20

@@ -8,4 +8,9 @@ export class AuthDto {
   @IsNotEmpty()
   @IsDefined()
   password: string;
+
+  constructor(user?: string, password?: string) {
+    this.user = user;
+    this.password = password;
+  }
 }
