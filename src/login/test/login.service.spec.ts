@@ -1,9 +1,15 @@
+import { createdUser, createUser } from './mocks/user';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginModel } from '../login.model';
 import { LoginService } from '../login.service';
-import { loginModelResponse, loginUser, unauthorizedUser } from './mocks';
+import {
+  conflictUser,
+  loginModelResponse,
+  loginUser,
+  unauthorizedUser,
+} from './mocks';
 import * as bcrypt from 'bcrypt';
 
 describe('LoginService', () => {
@@ -18,8 +24,8 @@ describe('LoginService', () => {
           provide: LoginModel,
           useValue: {
             signIn: jest.fn().mockResolvedValue(loginModelResponse),
-            findByEmailOrUsername: jest.fn(),
-            create: jest.fn(),
+            findByEmailOrUsername: jest.fn(null),
+            create: jest.fn().mockResolvedValue(createdUser),
           },
         },
         JwtService,
@@ -66,6 +72,38 @@ describe('LoginService', () => {
           await loginService.signIn(loginUser);
         } catch (error) {
           expect(error.response).toEqual(unauthorizedUser);
+        }
+      });
+    });
+  });
+
+  describe('Create', () => {
+    describe('Em casos de sucesso', () => {
+      it('Deve retornar um token em "access_token"', async () => {
+        jest
+          .spyOn(loginModel, 'findByEmailOrUsername')
+          .mockResolvedValueOnce(null);
+
+        const result = await loginService.create(createUser);
+
+        expect(loginModel.create).toHaveBeenCalledTimes(1);
+        expect(loginModel.findByEmailOrUsername).toHaveBeenCalledTimes(1);
+        expect(result).toHaveProperty('access_token');
+        expect(typeof result.access_token).toBe('string');
+      });
+    });
+
+    describe('Em casos de erro', () => {
+      it('Deve retornar um erro caso já exista o usuário', async () => {
+        jest
+          .spyOn(loginModel, 'findByEmailOrUsername')
+          .mockResolvedValueOnce(createdUser);
+
+        try {
+          await loginService.create(createUser);
+        } catch (error) {
+          expect(error.response).toEqual(conflictUser);
+          expect(loginModel.create).toHaveBeenCalledTimes(0);
         }
       });
     });
