@@ -44,6 +44,7 @@ describe('LoginController', () => {
       const result = await loginController.create(createUser);
 
       expect(loginService.create).toHaveBeenCalledTimes(1);
+      expect(loginService.create).toHaveBeenCalledWith(createUser);
       expect(result).toEqual(token);
     });
   });
