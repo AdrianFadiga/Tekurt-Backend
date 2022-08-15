@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginModel } from '../login.model';
 import { LoginService } from '../login.service';
-import { loginModelResponse, loginUser, token } from './mocks';
+import { loginModelResponse, loginUser, unauthorizedUser } from './mocks';
 import * as bcrypt from 'bcrypt';
 
 describe('LoginService', () => {
@@ -49,7 +49,25 @@ describe('LoginService', () => {
     });
 
     describe('Em casos de erro', () => {
-      it('Deve retornar um erro caso o usuário não exista', () => {});
+      it('Deve retornar um erro caso o usuário não exista', async () => {
+        jest.spyOn(loginModel, 'signIn').mockResolvedValueOnce(null);
+
+        try {
+          await loginService.signIn(loginUser);
+        } catch (error) {
+          expect(error.response).toEqual(unauthorizedUser);
+        }
+      });
+
+      it('Deve retornar um erro caso a senha esteja incorreta', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false);
+
+        try {
+          await loginService.signIn(loginUser);
+        } catch (error) {
+          expect(error.response).toEqual(unauthorizedUser);
+        }
+      });
     });
   });
 });
