@@ -14,7 +14,6 @@ import {
   UserEmpty,
   UserUndefined,
 } from './responses/errors';
-import { UserDto } from '../src/user/dtos';
 
 describe('Testes da rota Login', () => {
   let app: INestApplication;
