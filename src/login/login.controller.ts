@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { LoginService } from './login.service';
 import { AuthDto } from './dtos';
-import { UserDto } from '../user/dtos';
+import { SignUpDto } from './dtos';
 import { JwtGuard } from './guard';
 import { GetUser } from './decorator';
 import { User } from '@prisma/client';
@@ -32,7 +32,7 @@ export class LoginController {
   }
 
   @Post('/signup')
-  create(@Body() dto: UserDto) {
+  create(@Body() dto: SignUpDto) {
     return this.loginService.create(dto);
   }
 }

@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { UserDto } from '../../../user/dtos';
+import { SignUpDto } from '../../dtos';
 import { AuthDto } from '../../dtos/authDto.dto';
 
 export const loginUser = new AuthDto('usuario teste', '12345678');
@@ -11,19 +11,12 @@ export const loginModelResponse = {
   password: 'senha123',
 };
 
-export const createUser: UserDto = {
+export const createUser: SignUpDto = {
   firstName: 'usuario teste',
   lastName: 'sobrenome',
   password: '12345678',
   email: 'teste@gmail.com',
   username: 'usuario_teste',
-  biography: '',
-  children: true,
-  drinkingId: 'id_drink',
-  imageUrl: 'dadada',
-  signId: 'id_sign',
-  smokes: false,
-  socialStatusId: 'id_socialStatus',
 };
 
 export const createdUser: User = {

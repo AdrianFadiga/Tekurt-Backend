@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   MaxLength,
@@ -7,6 +8,11 @@ import {
 } from 'class-validator';
 
 export class passwordDto {
+  @ApiProperty({
+    description: 'Senha atualizada do usuário',
+    default: 'novaSenha',
+    required: true,
+  })
   @IsString()
   @IsNotEmpty()
   @IsDefined()

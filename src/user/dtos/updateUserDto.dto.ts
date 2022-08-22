@@ -4,113 +4,122 @@ import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsString,
   IsUrl,
   MaxLength,
   MinLength,
 } from 'class-validator';
 
-export class UserDto {
+export class UpdateUserDto {
   @ApiProperty({
     description: 'Nome do usuário',
     default: 'João',
-    required: true,
+    required: false,
   })
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
+  @IsOptional()
   firstName: string;
 
   @ApiProperty({
     description: 'Sobrenome do usuário',
     default: 'Da Silva',
-    required: true,
+    required: false,
   })
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
+  @IsOptional()
   lastName: string;
-
-  // retirar a senha para o front nao ter q passar pela requisição
-  // fazer uma rota só para att a senha
-  @ApiProperty({
-    description: 'Senha do usuário',
-    default: '123456',
-    required: true,
-  })
-  @IsString()
-  @IsNotEmpty()
-  @IsDefined()
-  @MinLength(6)
-  @MaxLength(20)
-  password: string;
 
   @ApiProperty({
     description: 'Username do usuário',
     default: 'JoaoDaSilva_Sk8',
-    required: true,
+    required: false,
   })
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
   @MaxLength(30)
+  @IsOptional()
   username: string;
 
   @ApiProperty({
     description: 'Email do usuário',
     default: 'joaodasilva@email.com',
-    required: true,
+    required: false,
   })
   @IsEmail()
   @IsNotEmpty()
   @IsDefined()
   @MaxLength(30)
+  @IsOptional()
   email: string;
 
-  // @ApiPropertyOptional({
-  //   description: 'Imagem de perfil do usuário',
-  // })
+  @ApiProperty({
+    description: 'Imagem de perfil do usuário',
+    default:
+      'https://i.pinimg.com/736x/34/a1/a8/34a1a8ccc9603e62ce305fbc7e8bb1ea.jpg',
+    required: false,
+  })
   @IsOptional()
   @IsUrl()
+  @IsNotEmpty()
   imageUrl: string;
 
-  // @ApiPropertyOptional({
-  // description: 'Status social do usuário',
-  // })
+  @ApiProperty({
+    description: 'Status social do usuário',
+    default: '1',
+    required: false,
+  })
   @IsOptional()
+  @IsNotEmpty()
   socialStatusId: string;
 
-  // @ApiPropertyOptional({
-  //   description: 'Usuário possui crianças?',
-  //   required: false,
-  // })
+  @ApiProperty({
+    description: 'Usuário possui filho?',
+    default: true,
+    required: false,
+  })
   @IsOptional()
+  @IsNotEmpty()
   children: boolean;
 
-  // @ApiPropertyOptional({
-  //   description: 'Usuário fumante?',
-  // })
+  @ApiProperty({
+    description: 'Usuário fumante?',
+    default: false,
+    required: false,
+  })
   @IsOptional()
+  @IsNotEmpty()
   smokes: boolean;
 
-  // @ApiPropertyOptional({
-  //   description: 'Frequência que o usuário bebe',
-  // })
+  @ApiProperty({
+    description: 'Frequência que o usuário bebe',
+    default: '1',
+    required: false,
+  })
   @IsOptional()
   drinkingId: string;
 
-  // @ApiPropertyOptional({
-  //   description: 'Signo do usuário',
-  // })
+  @ApiProperty({
+    description: 'Signo do usuário',
+    default: '2',
+    required: false,
+  })
   @IsOptional()
+  @IsNotEmpty()
   signId: string;
 
-  // @ApiPropertyOptional({
-  //   description: 'Biografia do usuário',
-  // })
+  @ApiProperty({
+    description: 'Biografia do usuário',
+    default: 'Biografia que o usuário deseja colocar no perfil',
+    required: false,
+  })
   @IsOptional()
+  @IsNotEmpty()
   @MaxLength(500)
   biography: string;
 }
