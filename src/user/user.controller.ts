@@ -8,6 +8,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
@@ -15,14 +16,10 @@ import { passwordDto, UserDto } from './dtos';
 import { UserService } from './user.service';
 
 @UseGuards(JwtGuard)
+@ApiBearerAuth()
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
-
-  @Get('/me')
-  getMe(@GetUser() user: User) {
-    return user;
-  }
 
   @Get('/:username')
   readOne(@Param('username') username: string) {
@@ -37,7 +34,7 @@ export class UserController {
   @Put('/:id')
   async update(
     @GetUser() { id }: User,
-    @Body() dto: Omit<UserDto, 'password'>,
+    @Body() dto: UserDto,
     @Param('id') paramId: string,
   ) {
     return this.userService.update(id, paramId, dto);
