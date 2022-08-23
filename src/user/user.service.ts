@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { excludeField } from '../utils/excludeField';
-import { UserDto } from './dtos';
+import { UpdateUserDto } from './dtos';
 import { UserModel } from './user.model';
 import * as bcrypt from 'bcrypt';
 
@@ -38,7 +38,7 @@ export class UserService {
     if (userId !== paramId) throw new UnauthorizedException();
   }
 
-  async update(id: string, paramId: string, dto: Omit<UserDto, 'password'>) {
+  async update(id: string, paramId: string, dto: UpdateUserDto) {
     this.validateUser(id, paramId);
     await this.userModel.update(id, dto);
   }

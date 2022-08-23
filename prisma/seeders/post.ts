@@ -15,11 +15,15 @@ async function main() {
     },
   ];
 
-  for (const post of posts) {
-    await prisma.post.create({
-      data: { ...post },
-    });
-  }
+  // Este setTimeout existe pois se não as seeders de post são criadas antes da user
+  // e acaba quebrando o banco de dados.
+  setTimeout(async () => {
+    for (const post of posts) {
+      await prisma.post.create({
+        data: { ...post },
+      });
+    }
+  }, 1000);
 }
 
 main()

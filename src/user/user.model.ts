@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { UserDto } from './dtos';
+import { UpdateUserDto } from './dtos';
 
 @Injectable()
 export class UserModel {
@@ -28,7 +28,7 @@ export class UserModel {
     return user;
   }
 
-  async update(id: string, dto: Omit<UserDto, 'password'>) {
+  async update(id: string, dto: UpdateUserDto) {
     await this.database.user.update({
       where: { id },
       data: { ...dto },

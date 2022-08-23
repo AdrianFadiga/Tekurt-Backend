@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { TokenSign } from './interfaces/TokenSign';
-import { UserDto } from '../user/dtos';
+import { SignUpDto } from './dtos';
 import { LoginModel } from './login.model';
 
 @Injectable()
@@ -49,7 +49,7 @@ export class LoginService {
     if (user) throw new ConflictException();
   }
 
-  async create(dto: UserDto) {
+  async create(dto: SignUpDto) {
     await this.verifyEmailInUse(dto.email, dto.username);
 
     dto.password = await bcrypt.hash(dto.password, 10);

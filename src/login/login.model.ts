@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { UserDto } from '../user/dtos';
+import { SignUpDto } from './dtos';
 
 @Injectable()
 export class LoginModel {
@@ -32,7 +32,7 @@ export class LoginModel {
     return user;
   }
 
-  async create(dto: UserDto) {
+  async create(dto: SignUpDto) {
     const newUser = await this.database.user.create({
       data: { ...dto },
     });
