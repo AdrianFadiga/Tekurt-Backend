@@ -12,8 +12,7 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
-import { passwordDto, UpdateUserDto } from './dtos';
-// import { passwordDto } from './dtos';
+import { DeleteUserDto, passwordDto, UpdateUserDto } from './dtos';
 
 import { UserService } from './user.service';
 
@@ -33,27 +32,21 @@ export class UserController {
     return this.userService.read();
   }
 
-  @Put('/:id')
-  async update(
-    @GetUser() { id }: User,
-    @Body() dto: UpdateUserDto,
-    @Param('id') paramId: string,
-  ) {
-    return this.userService.update(id, paramId, dto);
+  @Put('/me')
+  async update(@GetUser() { id }: User, @Body() dto: UpdateUserDto) {
+    return this.userService.update(id, dto);
   }
 
-  @Patch('/:id')
+  @Patch('/me')
   async updatePassword(
     @GetUser() { id }: User,
     @Body() { password }: passwordDto,
-    @Param('id') paramId: string,
   ) {
-    return this.userService.updatePassword(id, password, paramId);
+    return this.userService.updatePassword(id, password);
   }
 
-  @Delete('/:id')
-  async delete(@GetUser() user: User, @Param('id') paramId: string) {
-    const { id } = user;
-    return this.userService.delete(id, paramId);
+  @Delete('/me')
+  async delete(@GetUser() { id }: User, @Body() { password }: DeleteUserDto) {
+    return this.userService.delete(id, password);
   }
 }
