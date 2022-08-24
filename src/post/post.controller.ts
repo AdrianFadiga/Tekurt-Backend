@@ -11,6 +11,7 @@ import {
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
+import { PostDto } from './dtos';
 import { PostService } from './post.service';
 
 @UseGuards(JwtGuard)
@@ -18,9 +19,9 @@ import { PostService } from './post.service';
 export class PostController {
   constructor(private postService: PostService) {}
 
-  @Get('me')
+  @Get('/me')
   async getMe(@GetUser() { id }: User) {
-    return { id };
+    return this.postService.readAll(id);
   }
 
   @Get('/user/:id')
@@ -29,18 +30,26 @@ export class PostController {
   }
 
   @Get('/:id')
-  async readOne(@Param('id') id) {
+  async readOne(@Param('id') id: string) {
     return this.postService.readOne(id);
   }
 
   @Post()
-  async create(@GetUser() { id }: User) {
-    return id;
+  async create(@GetUser() { id }: User, @Body() dto: PostDto) {
+    return this.postService.create(id, dto);
   }
 
-  @Put()
-  async update() {}
+  @Put('/:postId')
+  async update(
+    @Param('postId') postId: string,
+    @GetUser() { id }: User,
+    @Body() dto: PostDto,
+  ) {
+    return this.postService.update(postId, id, dto);
+  }
 
-  @Delete()
-  async delete() {}
+  @Delete('/:postId')
+  async delete(@Param('postId') postId: string, @GetUser() { id }: User) {
+    return this.postService.delete(postId, id);
+  }
 }
