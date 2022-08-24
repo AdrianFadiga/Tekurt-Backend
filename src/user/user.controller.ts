@@ -33,8 +33,8 @@ export class UserController {
   }
 
   @Put('/me')
-  async update(@GetUser() { id }: User, @Body() dto: UpdateUserDto) {
-    return this.userService.update(id, dto);
+  async update(@GetUser() { id, username }: User, @Body() dto: UpdateUserDto) {
+    return this.userService.update(id, username, dto);
   }
 
   @Patch('/me')

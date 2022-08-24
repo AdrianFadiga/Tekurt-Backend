@@ -29,17 +29,19 @@ export class UserModel {
   }
 
   async update(id: string, dto: UpdateUserDto) {
-    await this.database.user.update({
+    const updatedUser = await this.database.user.update({
       where: { id },
       data: { ...dto },
     });
+    return updatedUser;
   }
 
   async updatePassword(id: string, password: any) {
-    await this.database.user.update({
+    const updatedUser = await this.database.user.update({
       where: { id },
       data: { password },
     });
+    return updatedUser;
   }
 
   async delete(id: string) {
