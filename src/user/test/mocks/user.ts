@@ -96,6 +96,24 @@ export const userKeys = [
   'updatedAt',
 ];
 
+export const userKeysWithoutPassword = [
+  'id',
+  'firstName',
+  'lastName',
+  'username',
+  'email',
+  'imageUrl',
+  'socialStatusId',
+  'children',
+  'smokes',
+  'drinkingId',
+  'signId',
+  'biography',
+  'active',
+  'createdAt',
+  'updatedAt',
+];
+
 export const updateDtoMock: UpdateUserDto = {
   firstName: 'João',
   lastName: 'Da Silva',
@@ -176,3 +194,21 @@ export const deleteMock = {
 export const usernameMock = 'usuario';
 
 export const userIdMock = '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37';
+
+export const readOneMock = {
+  id: '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37',
+  firstName: 'nome',
+  lastName: 'sobrenome',
+  username: 'usuario',
+  email: 'teste@teste.com',
+  imageUrl: 'url_imagem',
+  socialStatusId: null,
+  children: null,
+  smokes: null,
+  drinkingId: null,
+  signId: null,
+  biography: 'biografia',
+  active: true,
+  createdAt: '2022-08-24T00:56:05.524Z',
+  updatedAt: '2022-08-24T00:56:05.524Z',
+};
