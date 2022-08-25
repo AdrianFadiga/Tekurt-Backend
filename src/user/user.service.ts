@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -34,11 +35,22 @@ export class UserService {
     return user;
   }
 
-  async update(id: string, dto: UpdateUserDto) {
-    await this.userModel.update(id, dto);
+  private async verifyUsernameInUse(username: string) {
+    const user = await this.userModel.readOne(username);
+    if (user) throw new ConflictException();
+  }
+
+  async update(id: string, username: string, dto: UpdateUserDto) {
+    if (dto.username && dto.username !== username) {
+      await this.verifyUsernameInUse(dto.username);
+    }
+    const updatedUser = await this.userModel.update(id, dto);
+    excludeField(updatedUser, 'password');
+    return updatedUser;
   }
 
   async updatePassword(id: string, password: string) {
+    // await this.verifyUserPassword(id, password);
     const cryptoPassword = await bcrypt.hash(password, 10);
     await this.userModel.updatePassword(id, cryptoPassword);
   }
