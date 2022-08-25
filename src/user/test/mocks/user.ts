@@ -212,3 +212,7 @@ export const readOneMock = {
   createdAt: '2022-08-24T00:56:05.524Z',
   updatedAt: '2022-08-24T00:56:05.524Z',
 };
+
+export const updateUsernameDtoMock = {
+  username: 'username existente',
+};

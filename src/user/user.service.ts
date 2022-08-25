@@ -37,7 +37,7 @@ export class UserService {
 
   private async verifyUsernameInUse(username: string) {
     const user = await this.userModel.readOne(username);
-    if (user) throw new ConflictException('O username já existe');
+    if (user) throw new ConflictException();
   }
 
   async update(id: string, username: string, dto: UpdateUserDto) {
@@ -50,6 +50,7 @@ export class UserService {
   }
 
   async updatePassword(id: string, password: string) {
+    // await this.verifyUserPassword(id, password);
     const cryptoPassword = await bcrypt.hash(password, 10);
     await this.userModel.updatePassword(id, cryptoPassword);
   }
