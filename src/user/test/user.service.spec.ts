@@ -9,14 +9,16 @@ import {
   findByIdMock,
   findManyMock,
   findUniqueMock,
+  invalidPasswordMock,
   notFound,
   passwordMock,
   readOneMock,
+  unauthorized,
   updateDtoMock,
   updateMock,
-  updateUsernameDtoMock,
   userIdMock,
   userKeysWithoutPassword,
+  usernameInUseMock,
   usernameMock,
 } from './mocks';
 import { UpdateUserDto } from '../dtos';
@@ -90,6 +92,7 @@ describe('User Service', () => {
     });
     describe('updatePassword', () => {
       it('deve retornar undefined', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true);
         const result = await userService.updatePassword(
           userIdMock,
           passwordMock,
@@ -159,7 +162,7 @@ describe('User Service', () => {
           await userService.update(
             userIdMock,
             usernameMock,
-            updateUsernameDtoMock as UpdateUserDto,
+            usernameInUseMock as UpdateUserDto,
           );
         } catch (err) {
           expect(err.response).toEqual(conflict);
@@ -167,10 +170,30 @@ describe('User Service', () => {
       });
     });
     describe('updatePassword', () => {
-      it('', async () => {});
+      it('Deve lançar o erro unauthorized', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false);
+        jest
+          .spyOn(userModel, 'findById')
+          .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
+        try {
+          await userService.updatePassword(userIdMock, invalidPasswordMock);
+        } catch (err) {
+          expect(err.response).toEqual(unauthorized);
+        }
+      });
     });
     describe('delete', () => {
-      it('', async () => {});
+      it('Deve lançar o erro unauthorized', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false);
+        jest
+          .spyOn(userModel, 'findById')
+          .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
+        try {
+          await userService.updatePassword(userIdMock, invalidPasswordMock);
+        } catch (err) {
+          expect(err.response).toEqual(unauthorized);
+        }
+      });
     });
   });
 });

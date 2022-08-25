@@ -213,6 +213,8 @@ export const readOneMock = {
   updatedAt: '2022-08-24T00:56:05.524Z',
 };
 
-export const updateUsernameDtoMock = {
+export const usernameInUseMock = {
   username: 'username existente',
 };
+
+export const invalidPasswordMock = 'senhaInvalida';
