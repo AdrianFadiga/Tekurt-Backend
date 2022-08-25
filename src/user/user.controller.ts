@@ -40,9 +40,9 @@ export class UserController {
   @Patch('/me')
   async updatePassword(
     @GetUser() { id }: User,
-    @Body() { password }: passwordDto,
+    @Body() { password, newPassword }: passwordDto,
   ) {
-    return this.userService.updatePassword(id, password);
+    return this.userService.updatePassword(id, password, newPassword);
   }
 
   @Delete('/me')

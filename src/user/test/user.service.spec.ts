@@ -9,14 +9,17 @@ import {
   findByIdMock,
   findManyMock,
   findUniqueMock,
+  invalidPasswordMock,
+  newPasswordMock,
   notFound,
   passwordMock,
   readOneMock,
+  unauthorized,
   updateDtoMock,
   updateMock,
-  updateUsernameDtoMock,
   userIdMock,
   userKeysWithoutPassword,
+  usernameInUseMock,
   usernameMock,
 } from './mocks';
 import { UpdateUserDto } from '../dtos';
@@ -90,9 +93,11 @@ describe('User Service', () => {
     });
     describe('updatePassword', () => {
       it('deve retornar undefined', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true);
         const result = await userService.updatePassword(
           userIdMock,
           passwordMock,
+          newPasswordMock,
         );
         expect(result).toEqual(undefined);
       });
@@ -120,9 +125,6 @@ describe('User Service', () => {
               read: jest.fn().mockResolvedValue(null),
               readOne: jest.fn().mockResolvedValue(null),
               findById: jest.fn().mockResolvedValue(null),
-              //   update: jest.fn().mockResolvedValue(updateMock),
-              //   updatePassword: jest.fn().mockResolvedValue(findByIdMock),
-              //   delete: jest.fn().mockResolvedValue(findByIdMock),
             },
           },
           JwtService,
@@ -159,7 +161,7 @@ describe('User Service', () => {
           await userService.update(
             userIdMock,
             usernameMock,
-            updateUsernameDtoMock as UpdateUserDto,
+            usernameInUseMock as UpdateUserDto,
           );
         } catch (err) {
           expect(err.response).toEqual(conflict);
@@ -167,10 +169,38 @@ describe('User Service', () => {
       });
     });
     describe('updatePassword', () => {
-      it('', async () => {});
+      it('Deve lançar o erro unauthorized', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false);
+        jest
+          .spyOn(userModel, 'findById')
+          .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
+        try {
+          await userService.updatePassword(
+            userIdMock,
+            invalidPasswordMock,
+            newPasswordMock,
+          );
+        } catch (err) {
+          expect(err.response).toEqual(unauthorized);
+        }
+      });
     });
     describe('delete', () => {
-      it('', async () => {});
+      it('Deve lançar o erro unauthorized', async () => {
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false);
+        jest
+          .spyOn(userModel, 'findById')
+          .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
+        try {
+          await userService.updatePassword(
+            userIdMock,
+            invalidPasswordMock,
+            newPasswordMock,
+          );
+        } catch (err) {
+          expect(err.response).toEqual(unauthorized);
+        }
+      });
     });
   });
 });

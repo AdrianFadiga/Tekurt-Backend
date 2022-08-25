@@ -49,16 +49,16 @@ export class UserService {
     return updatedUser;
   }
 
-  async updatePassword(id: string, password: string) {
-    // await this.verifyUserPassword(id, password);
-    const cryptoPassword = await bcrypt.hash(password, 10);
+  async updatePassword(id: string, password: string, newPassword: string) {
+    await this.verifyUserPassword(id, password);
+    const cryptoPassword = await bcrypt.hash(newPassword, 10);
     await this.userModel.updatePassword(id, cryptoPassword);
   }
 
   private async verifyUserPassword(id: string, password: string) {
     const user = await this.userModel.findById(id);
     const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) throw new UnauthorizedException('Senha inválida!');
+    if (!isValidPassword) throw new UnauthorizedException();
   }
 
   async delete(id: string, password: string) {

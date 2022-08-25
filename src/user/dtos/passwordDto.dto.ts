@@ -18,5 +18,17 @@ export class passwordDto {
   @IsDefined()
   @MinLength(6)
   @MaxLength(20)
+  newPassword: string;
+
+  @ApiProperty({
+    description: 'Senha atual do usuário',
+    default: 'senhaAtual',
+    required: true,
+  })
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @MinLength(6)
+  @MaxLength(20)
   password: string;
 }
