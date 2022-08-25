@@ -49,9 +49,9 @@ export class UserService {
     return updatedUser;
   }
 
-  async updatePassword(id: string, password: string) {
+  async updatePassword(id: string, password: string, newPassword: string) {
     await this.verifyUserPassword(id, password);
-    const cryptoPassword = await bcrypt.hash(password, 10);
+    const cryptoPassword = await bcrypt.hash(newPassword, 10);
     await this.userModel.updatePassword(id, cryptoPassword);
   }
 

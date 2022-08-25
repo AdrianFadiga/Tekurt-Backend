@@ -149,6 +149,25 @@ export const updateMock = {
   updatedAt: '2022-08-24T15:53:12.943Z',
 };
 
+export const updateMockWithoutPassword = {
+  id: '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37',
+  firstName: 'João',
+  lastName: 'Da Silva',
+  username: 'JoaoDaSilva_Sk8',
+  email: 'joaodasilva@email.com',
+  imageUrl:
+    'https://i.pinimg.com/736x/34/a1/a8/34a1a8ccc9603e62ce305fbc7e8bb1ea.jpg',
+  socialStatusId: null,
+  children: true,
+  smokes: false,
+  drinkingId: null,
+  signId: null,
+  biography: 'Biografia que o usuário deseja colocar no perfil',
+  active: true,
+  createdAt: '2022-08-24T15:53:12.943Z',
+  updatedAt: '2022-08-24T15:53:12.943Z',
+};
+
 export const idPasswordMock = '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37';
 export const passwordMock = '123456';
 
@@ -214,7 +233,46 @@ export const readOneMock = {
 };
 
 export const usernameInUseMock = {
-  username: 'username existente',
+  username: 'username já cadastrado',
 };
 
 export const invalidPasswordMock = 'senhaInvalida';
+
+export const newPasswordMock = 'novaSenha';
+
+export const userArrayMock = [
+  {
+    id: '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37',
+    firstName: 'nome',
+    lastName: 'sobrenome',
+    username: 'usuario',
+    email: 'teste@teste.com',
+    imageUrl: 'url_imagem',
+    socialStatusId: null,
+    children: null,
+    smokes: null,
+    drinkingId: null,
+    signId: null,
+    biography: 'biografia',
+    active: true,
+    createdAt: '2022-08-24T19:19:59.572Z',
+    updatedAt: '2022-08-24T19:19:59.572Z',
+  },
+  {
+    id: '2bb6e92a-3c2b-4b7f-a822-96f5106d8c37',
+    firstName: 'nome',
+    lastName: 'sobrenome',
+    username: 'usuario',
+    email: 'teste@teste.com',
+    imageUrl: 'url_imagem',
+    socialStatusId: null,
+    children: null,
+    smokes: null,
+    drinkingId: null,
+    signId: null,
+    biography: 'biografia',
+    active: true,
+    createdAt: '2022-08-24T19:19:59.572Z',
+    updatedAt: '2022-08-24T19:19:59.572Z',
+  },
+];

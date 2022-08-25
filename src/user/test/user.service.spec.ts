@@ -10,6 +10,7 @@ import {
   findManyMock,
   findUniqueMock,
   invalidPasswordMock,
+  newPasswordMock,
   notFound,
   passwordMock,
   readOneMock,
@@ -96,6 +97,7 @@ describe('User Service', () => {
         const result = await userService.updatePassword(
           userIdMock,
           passwordMock,
+          newPasswordMock,
         );
         expect(result).toEqual(undefined);
       });
@@ -123,9 +125,6 @@ describe('User Service', () => {
               read: jest.fn().mockResolvedValue(null),
               readOne: jest.fn().mockResolvedValue(null),
               findById: jest.fn().mockResolvedValue(null),
-              //   update: jest.fn().mockResolvedValue(updateMock),
-              //   updatePassword: jest.fn().mockResolvedValue(findByIdMock),
-              //   delete: jest.fn().mockResolvedValue(findByIdMock),
             },
           },
           JwtService,
@@ -176,7 +175,11 @@ describe('User Service', () => {
           .spyOn(userModel, 'findById')
           .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
         try {
-          await userService.updatePassword(userIdMock, invalidPasswordMock);
+          await userService.updatePassword(
+            userIdMock,
+            invalidPasswordMock,
+            newPasswordMock,
+          );
         } catch (err) {
           expect(err.response).toEqual(unauthorized);
         }
@@ -189,7 +192,11 @@ describe('User Service', () => {
           .spyOn(userModel, 'findById')
           .mockResolvedValueOnce({ password: invalidPasswordMock } as any);
         try {
-          await userService.updatePassword(userIdMock, invalidPasswordMock);
+          await userService.updatePassword(
+            userIdMock,
+            invalidPasswordMock,
+            newPasswordMock,
+          );
         } catch (err) {
           expect(err.response).toEqual(unauthorized);
         }
