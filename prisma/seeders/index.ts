@@ -3,3 +3,4 @@ import './drinking';
 import './sign';
 import './socialStatus';
 import './post';
+import './friend';

@@ -23,7 +23,7 @@ async function main() {
         data: { ...post },
       });
     }
-  }, 1000);
+  }, 2000);
 }
 
 main()
