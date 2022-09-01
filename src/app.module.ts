@@ -4,6 +4,7 @@ import { LoginModule } from './login/login.module';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
+import { FriendModule } from './friend/friend.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { PostModule } from './post/post.module';
     DatabaseModule,
     UserModule,
     PostModule,
+    FriendModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
