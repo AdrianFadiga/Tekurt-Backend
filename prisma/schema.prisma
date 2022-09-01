@@ -56,8 +56,8 @@ model User {
   updatedAt      DateTime      @default(now()) @map("updated_name")
 
   Post Post[]
-  user Friend[] @relation("user")
-  friend Friend[] @relation("friend")
+  friends Friend[] @relation("user")
+  invites Friend[] @relation("friend")
 
   @@map("users")
 }

@@ -21,8 +21,8 @@ export class FriendModel {
     return this.databaseService.friend.findUnique({
       where: {
         userId_friendId: {
-          friendId,
-          userId: id,
+          friendId: id,
+          userId: friendId,
         },
       },
     });
@@ -39,8 +39,8 @@ export class FriendModel {
   async create(friendId: string, id: string) {
     return this.databaseService.friend.create({
       data: {
-        userId: id,
-        friendId,
+        userId: friendId,
+        friendId: id,
       },
     });
   }

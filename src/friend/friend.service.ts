@@ -21,11 +21,17 @@ export class FriendService {
     return this.friendModel.readAll(id);
   }
 
-  async create(friendId: string, id: string) {
-    await this.verifyUserExists(friendId);
+  async verifyInviteExists(friendId: string, id: string) {
     const alreadyInvited = await this.friendModel.readOne(friendId, id);
     if (alreadyInvited) throw new ConflictException();
-    return this.friendModel.create(friendId, id);
+    return this.friendModel.readOne(id, friendId);
+  }
+
+  async create(friendId: string, id: string) {
+    await this.verifyUserExists(friendId);
+    const inviteExists = await this.verifyInviteExists(friendId, id);
+    if (!inviteExists) return this.friendModel.create(friendId, id);
+    return this.update(friendId, id);
   }
 
   async verifyUserExists(id: string) {
