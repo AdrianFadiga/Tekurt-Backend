@@ -15,6 +15,23 @@ export class UserModel {
   async readOne(username: string) {
     const user = await this.database.user.findUnique({
       where: { username },
+      include: {
+        friends: {
+          include: {
+            friend: {
+              select: {
+                firstName: true,
+                lastName: true,
+                username: true,
+                imageUrl: true,
+              },
+            },
+          },
+        },
+        invites: {
+          where: { status: 'pending' },
+        },
+      },
     });
 
     return user;
