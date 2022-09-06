@@ -4,8 +4,8 @@
 /build
 
 # Environment
-.env.test
-.env
+# .env.test
+# .env
 
 # Logs
 logs
