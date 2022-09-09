@@ -20,9 +20,9 @@ export class PostModel {
     return post;
   }
 
-  async create(authorId: string, dto: PostDto) {
+  async create(authorId: string, dto: PostDto, mediaUrl: string) {
     const newPost = await this.database.post.create({
-      data: { ...dto, authorId },
+      data: { ...dto, authorId, mediaUrl },
     });
     return newPost;
   }

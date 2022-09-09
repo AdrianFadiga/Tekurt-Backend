@@ -12,13 +12,15 @@ export class PostDto {
   @MaxLength(300)
   content: string;
 
-  @ApiProperty({
-    description: 'Foto do post',
-    default:
-      'https://img.freepik.com/fotos-gratis/recuperar-labrador_155003-149.jpg',
-    required: false,
-  })
-  @IsNotEmpty()
-  @IsOptional()
-  mediaUrl: string;
+  xablau: string;
+
+  // @ApiProperty({
+  //   description: 'Foto do post',
+  //   default:
+  //     'https://img.freepik.com/fotos-gratis/recuperar-labrador_155003-149.jpg',
+  //   required: false,
+  // })
+  // @IsNotEmpty()
+  // @IsOptional()
+  // mediaUrl: string;
 }
