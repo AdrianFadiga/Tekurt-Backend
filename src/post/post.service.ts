@@ -1,4 +1,5 @@
 import {
+  GoneException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -33,8 +34,9 @@ export class PostService {
     return post;
   }
 
-  async create(authorId: string, dto: PostDto) {
-    return this.postModel.create(authorId, dto);
+  async create(authorId: string, file: Express.Multer.File, dto: PostDto) {
+    const mediaUrl = await this.uploadImg(file);
+    return this.postModel.create(authorId, dto, mediaUrl);
   }
 
   async update(postId: string, id: string, dto: PostDto) {
@@ -49,18 +51,26 @@ export class PostService {
     await this.postModel.delete(postId);
   }
 
-  async createImage(file: Express.Multer.File, fileName: string) {
-    const imgurClient = new ImgurClient({
-      clientId: '0fef92e95267360',
-      clientSecret: 'c4f3e10ce33fb41f23a7e9037c642bb3f375d322',
-      refreshToken: '835c13fedcbead8c4c02717b49755f63a946fb02',
-    });
-    const filePath = path.join(__dirname, '..', `../../uploads/${fileName}`);
-    const response = await imgurClient.upload({
-      image: fs.createReadStream(filePath) as any,
-      type: 'stream',
-    });
-    fs.unlinkSync(filePath);
-    return response.data.link;
+  async uploadImg(file: Express.Multer.File) {
+    try {
+      const imgurClient = new ImgurClient({
+        clientId: '0fef92e95267360',
+        clientSecret: 'c4f3e10ce33fb41f23a7e9037c642bb3f375d322',
+        refreshToken: '835c13fedcbead8c4c02717b49755f63a946fb02',
+      });
+      const filePath = path.join(
+        __dirname,
+        '..',
+        `../../uploads/${file.filename}`,
+      );
+      const response = await imgurClient.upload({
+        image: fs.createReadStream(filePath) as any,
+        type: 'stream',
+      });
+      fs.unlinkSync(filePath);
+      return response.data.link;
+    } catch {
+      throw new GoneException('Deu ruim no upload');
+    }
   }
 }

@@ -9,7 +9,6 @@ import {
   ParseFilePipe,
   Post,
   Put,
-  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -21,8 +20,6 @@ import { JwtGuard } from '../login/guard';
 import { PostDto } from './dtos';
 import { PostService } from './post.service';
 import { Express } from 'express';
-// const fs = require('fs/promises');
-// const path = require('path');
 
 @UseGuards(JwtGuard)
 @Controller('posts')
@@ -44,11 +41,6 @@ export class PostController {
     return this.postService.readOne(id);
   }
 
-  @Post()
-  async create(@GetUser() { id }: User, @Body() dto: PostDto) {
-    return this.postService.create(id, dto);
-  }
-
   @Put('/:postId')
   async update(
     @Param('postId') postId: string,
@@ -63,7 +55,7 @@ export class PostController {
     return this.postService.delete(postId, id);
   }
 
-  @Post('file')
+  @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile(
@@ -77,8 +69,9 @@ export class PostController {
       }),
     )
     file: Express.Multer.File,
+    @GetUser() { id }: User,
+    @Body() dto: PostDto,
   ) {
-    const xablau = await this.postService.createImage(file, file.filename);
-    return xablau;
+    return this.postService.create(id, file, dto);
   }
 }
