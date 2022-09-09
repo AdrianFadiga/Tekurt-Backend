@@ -6,6 +6,9 @@ import {
 import { UserService } from '../user/user.service';
 import { PostDto } from './dtos';
 import { PostModel } from './post.model';
+import { ImgurClient } from 'imgur';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class PostService {
@@ -44,5 +47,20 @@ export class PostService {
     const { authorId } = await this.readOne(postId);
     await this.verifyPostAuthor(id, authorId);
     await this.postModel.delete(postId);
+  }
+
+  async createImage(file: Express.Multer.File, fileName: string) {
+    const imgurClient = new ImgurClient({
+      clientId: '0fef92e95267360',
+      clientSecret: 'c4f3e10ce33fb41f23a7e9037c642bb3f375d322',
+      refreshToken: '835c13fedcbead8c4c02717b49755f63a946fb02',
+    });
+    const filePath = path.join(__dirname, '..', `../../uploads/${fileName}`);
+    const response = await imgurClient.upload({
+      image: fs.createReadStream(filePath) as any,
+      type: 'stream',
+    });
+    fs.unlinkSync(filePath);
+    return response.data.link;
   }
 }
