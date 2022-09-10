@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -33,7 +34,8 @@ export class UserController {
   }
 
   @Get()
-  read() {
+  read(@Query('filter') filter: string) {
+    if (filter) return this.userService.readByQuery(filter);
     return this.userService.read();
   }
 
