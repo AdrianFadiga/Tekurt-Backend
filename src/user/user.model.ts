@@ -12,6 +12,19 @@ export class UserModel {
     return users;
   }
 
+  async readByQuery(filter: string) {
+    const users = await this.database.user.findMany({
+      where: {
+        OR: [
+          { firstName: { contains: filter } },
+          { lastName: { contains: filter } },
+          { username: { contains: filter } },
+        ],
+      },
+    });
+    return users;
+  }
+
   async readOne(username: string) {
     const user = await this.database.user.findUnique({
       where: { username },

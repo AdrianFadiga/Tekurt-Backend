@@ -20,6 +20,12 @@ export class UserService {
     return users;
   }
 
+  async readByQuery(filter: string) {
+    const users = await this.userModel.readByQuery(filter);
+    users.map((user) => excludeField(user, 'password'));
+    return users;
+  }
+
   async readOne(username: string) {
     const user = await this.userModel.readOne(username);
     if (!user) throw new NotFoundException();
