@@ -34,8 +34,13 @@ export class PostService {
     return post;
   }
 
-  async create(authorId: string, file: Express.Multer.File, dto: PostDto) {
-    const mediaUrl = await this.uploadImg(file);
+  async create(
+    authorId: string,
+    file: Express.Multer.File | undefined,
+    dto: PostDto,
+  ) {
+    let mediaUrl = null;
+    if (file) mediaUrl = await this.uploadImg(file);
     return this.postModel.create(authorId, dto, mediaUrl);
   }
 

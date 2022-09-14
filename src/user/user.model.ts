@@ -13,9 +13,13 @@ export class UserModel {
   }
 
   async readByQuery(filter: string) {
+    const splitedFilter = filter.split(' ');
     const users = await this.database.user.findMany({
       where: {
         OR: [
+          { firstName: { in: splitedFilter } },
+          { lastName: { in: splitedFilter } },
+          { username: { in: splitedFilter } },
           { firstName: { contains: filter } },
           { lastName: { contains: filter } },
           { username: { contains: filter } },

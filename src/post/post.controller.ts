@@ -2,11 +2,9 @@ import {
   Body,
   Controller,
   Delete,
-  FileTypeValidator,
   Get,
-  MaxFileSizeValidator,
   Param,
-  ParseFilePipe,
+  ParseFilePipeBuilder,
   Post,
   Put,
   UploadedFile,
@@ -59,16 +57,16 @@ export class PostController {
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5000000 }),
-          new FileTypeValidator({
-            fileType: /(gif|jpe?g|tiff?|png|webp|bmp)$/i,
-          }),
-        ],
-      }),
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: /(gif|jpe?g|tiff?|png|webp|bmp)$/i,
+        })
+        .addMaxSizeValidator({ maxSize: 5000000 })
+        .build({
+          fileIsRequired: false,
+        }),
     )
-    file: Express.Multer.File,
+    file: Express.Multer.File | undefined,
     @GetUser() { id }: User,
     @Body() dto: PostDto,
   ) {
