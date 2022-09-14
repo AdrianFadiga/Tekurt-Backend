@@ -48,6 +48,9 @@ export class UserModel {
         invites: {
           where: { status: 'pending' },
         },
+        socialStatus: { select: { status: true } },
+        sign: { select: { sign: true } },
+        drinking: { select: { option: true } },
       },
     });
 

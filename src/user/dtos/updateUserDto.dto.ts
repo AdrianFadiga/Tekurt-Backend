@@ -71,12 +71,12 @@ export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Status social do usuário',
-    default: '1',
+    default: 1,
     required: false,
   })
   @IsOptional()
   @IsNotEmpty()
-  socialStatusId: string;
+  socialStatusId: number;
 
   @ApiProperty({
     description: 'Usuário possui filho?',
@@ -98,20 +98,20 @@ export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Frequência que o usuário bebe',
-    default: '1',
+    default: 2,
     required: false,
   })
   @IsOptional()
-  drinkingId: string;
+  drinkingId: number;
 
   @ApiProperty({
     description: 'Signo do usuário',
-    default: '2',
+    default: 2,
     required: false,
   })
   @IsOptional()
   @IsNotEmpty()
-  signId: string;
+  signId: number;
 
   @ApiProperty({
     description: 'Biografia do usuário',

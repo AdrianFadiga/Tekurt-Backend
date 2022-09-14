@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Sign {
-  id   String @id @default(uuid())
+  id     Int @id @default(autoincrement())
   sign String @db.VarChar(20)
 
   User User[]
@@ -17,7 +17,7 @@ model Sign {
 }
 
 model SocialStatus {
-  id     String @id @default(uuid())
+  id     Int @id @default(autoincrement())
   status String @db.VarChar(20)
 
   User User[]
@@ -26,7 +26,7 @@ model SocialStatus {
 }
 
 model Drinking {
-  id     String @id @default(uuid())
+  id     Int @id @default(autoincrement())
   option String @db.VarChar(15)
 
   User User[]
@@ -43,13 +43,13 @@ model User {
   password       String        @db.VarChar(200)
   imageUrl       String?       @map("image_url") @db.VarChar(500)
   socialStatus   SocialStatus? @relation(fields: [socialStatusId], references: [id])
-  socialStatusId String?       @map("social_status_id")
+  socialStatusId Int?       @map("social_status_id") @default(1)
   children       Boolean?
   smokes         Boolean?
   drinking       Drinking?     @relation(fields: [drinkingId], references: [id])
-  drinkingId     String?       @map("drinking_id")
+  drinkingId     Int?       @map("drinking_id") @default(1)
   sign           Sign?         @relation(fields: [signId], references: [id])
-  signId         String?       @map("sign_id")
+  signId         Int?       @map("sign_id") @default(1)
   biography      String?       @db.VarChar(300)
   active         Boolean       @default(true)
   createdAt      DateTime      @default(now()) @map("created_at")

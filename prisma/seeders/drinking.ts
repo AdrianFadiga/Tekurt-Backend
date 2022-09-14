@@ -1,7 +1,14 @@
 import { prisma } from '../prismaClient';
 
 async function main() {
-  const options = ['Sim', 'Não', 'As vezes', 'Socialmente', 'Com os amigos'];
+  const options = [
+    'Não informado',
+    'Sim',
+    'Não',
+    'As vezes',
+    'Socialmente',
+    'Com os amigos',
+  ];
 
   for (const option of options) {
     await prisma.drinking.create({

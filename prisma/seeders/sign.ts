@@ -2,6 +2,7 @@ import { prisma } from '../prismaClient';
 
 async function main() {
   const signs = [
+    'Não informado',
     'Áries',
     'Touro',
     'Gêmeos',
@@ -14,8 +15,6 @@ async function main() {
     'Capricórnio',
     'Aquário',
     'Peixes',
-    'Nenhum',
-    'Prefiro não informar',
   ];
 
   for (const sign of signs) {
