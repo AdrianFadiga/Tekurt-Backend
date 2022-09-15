@@ -47,29 +47,6 @@ export class UpdateUserDto {
   username: string;
 
   @ApiProperty({
-    description: 'Email do usuário',
-    default: 'joaodasilva@email.com',
-    required: false,
-  })
-  @IsEmail()
-  @IsNotEmpty()
-  @IsDefined()
-  @MaxLength(30)
-  @IsOptional()
-  email: string;
-
-  @ApiProperty({
-    description: 'Imagem de perfil do usuário',
-    default:
-      'https://i.pinimg.com/736x/34/a1/a8/34a1a8ccc9603e62ce305fbc7e8bb1ea.jpg',
-    required: false,
-  })
-  @IsOptional()
-  @IsUrl()
-  @IsNotEmpty()
-  imageUrl: string;
-
-  @ApiProperty({
     description: 'Status social do usuário',
     default: 1,
     required: false,
