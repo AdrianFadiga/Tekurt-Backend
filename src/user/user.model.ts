@@ -86,4 +86,12 @@ export class UserModel {
       where: { id },
     });
   }
+
+  async updatePhoto(id: string, imageUrl: string) {
+    const updatedUser = await this.database.user.update({
+      where: { id },
+      data: { imageUrl },
+    });
+    return updatedUser;
+  }
 }

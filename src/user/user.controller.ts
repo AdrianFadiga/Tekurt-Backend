@@ -4,17 +4,22 @@ import {
   Delete,
   Get,
   Param,
+  ParseFilePipeBuilder,
   Patch,
+  Post,
   Put,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from '../login/decorator';
 import { JwtGuard } from '../login/guard';
 import { DeleteUserDto, passwordDto, UpdateUserDto } from './dtos';
-
+import { Express } from 'express';
 import { UserService } from './user.service';
 
 @UseGuards(JwtGuard)
@@ -50,6 +55,25 @@ export class UserController {
     @Body() { password, newPassword }: passwordDto,
   ) {
     return this.userService.updatePassword(id, password, newPassword);
+  }
+
+  @Post('/me')
+  @UseInterceptors(FileInterceptor('file'))
+  async updatePhoto(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: /(gif|jpe?g|tiff?|png|bmp)$/i,
+        })
+        .addMaxSizeValidator({ maxSize: 5000000 })
+        .build({
+          fileIsRequired: true,
+        }),
+    )
+    file: Express.Multer.File,
+    @GetUser() { id }: User,
+  ) {
+    return this.userService.updatePhoto(id, file);
   }
 
   @Delete('/me')
