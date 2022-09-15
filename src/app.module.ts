@@ -5,6 +5,7 @@ import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { FriendModule } from './friend/friend.module';
+import { OptionsModule } from './options/options.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { FriendModule } from './friend/friend.module';
     UserModule,
     PostModule,
     FriendModule,
+    OptionsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
