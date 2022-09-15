@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, MaxLength } from 'class-validator';
+import { MaxLength } from 'class-validator';
 
 export class PostDto {
   @ApiProperty({
@@ -7,8 +7,6 @@ export class PostDto {
     default: 'Texto contendo o conteúdo do post',
     required: true,
   })
-  @IsDefined()
-  @IsNotEmpty()
   @MaxLength(300)
   content: string;
 }

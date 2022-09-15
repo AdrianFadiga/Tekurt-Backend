@@ -2,6 +2,7 @@ import { prisma } from '../prismaClient';
 
 async function main() {
   const socialStatus = [
+    'Não informado',
     'Solteiro(a)',
     'Namorando',
     'Noivo(a)',

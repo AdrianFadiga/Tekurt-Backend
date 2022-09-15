@@ -59,7 +59,7 @@ export class PostController {
     @UploadedFile(
       new ParseFilePipeBuilder()
         .addFileTypeValidator({
-          fileType: /(gif|jpe?g|tiff?|png|webp|bmp)$/i,
+          fileType: /(gif|jpe?g|tiff?|png|bmp)$/i,
         })
         .addMaxSizeValidator({ maxSize: 5000000 })
         .build({
