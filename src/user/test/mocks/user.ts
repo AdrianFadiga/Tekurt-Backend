@@ -118,9 +118,6 @@ export const updateDtoMock: UpdateUserDto = {
   firstName: 'João',
   lastName: 'Da Silva',
   username: 'JoaoDaSilva_Sk8',
-  email: 'joaodasilva@email.com',
-  imageUrl:
-    'https://i.pinimg.com/736x/34/a1/a8/34a1a8ccc9603e62ce305fbc7e8bb1ea.jpg',
   socialStatusId: null,
   children: true,
   smokes: false,
