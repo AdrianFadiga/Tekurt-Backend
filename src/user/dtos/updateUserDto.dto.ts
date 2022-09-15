@@ -97,6 +97,6 @@ export class UpdateUserDto {
   })
   @IsOptional()
   @IsNotEmpty()
-  @MaxLength(500)
+  @MaxLength(300)
   biography: string;
 }
