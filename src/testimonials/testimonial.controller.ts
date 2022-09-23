@@ -23,6 +23,11 @@ export class TestimonialController {
     return this.testimonialService.findByUserId(id);
   }
 
+  @Get('/user/:id')
+  async getByUserId(@Param('id') userId: string) {
+    return this.testimonialService.findByUserId(userId);
+  }
+
   @Get('/:id')
   async getById(@Param('id') id: string) {
     return this.testimonialService.findById(id);
