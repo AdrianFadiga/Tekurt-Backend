@@ -58,6 +58,8 @@ model User {
   Post Post[]
   friends Friend[] @relation("user")
   invites Friend[] @relation("friend")
+  testimonials Testimonial[] @relation("receiver")
+  testimonialsSent Testimonial[] @relation("sender")
 
   @@map("users")
 }
@@ -83,4 +85,18 @@ model Friend {
 
   @@id([userId, friendId])
   @@map("friends")
+}
+
+model Testimonial {
+  id String @id @default(uuid())
+  user User @relation("receiver", fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  sender User @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId String
+  status String @db.VarChar(200) @default("pending")
+  content String @db.VarChar(500)
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @default(now()) @map("updated_name")
+
+  @@map("testimonials")
 }
