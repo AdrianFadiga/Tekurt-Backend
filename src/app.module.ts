@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { FriendModule } from './friend/friend.module';
 import { OptionsModule } from './options/options.module';
+import { TestimonialModule } from './testimonials/testimonial.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { OptionsModule } from './options/options.module';
     UserModule,
     PostModule,
     FriendModule,
+    TestimonialModule,
     OptionsModule,
     ConfigModule.forRoot({
       isGlobal: true,
