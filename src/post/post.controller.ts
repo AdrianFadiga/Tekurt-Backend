@@ -63,7 +63,7 @@ export class PostController {
         })
         .addMaxSizeValidator({ maxSize: 5000000 })
         .build({
-          fileIsRequired: false,
+          fileIsRequired: true,
         }),
     )
     file: Express.Multer.File | undefined,

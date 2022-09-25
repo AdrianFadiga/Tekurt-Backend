@@ -1,7 +1,7 @@
 import { prisma } from '../prismaClient';
 
 async function main() {
-  const signs = [
+  const options = [
     'Não informado',
     'Áries',
     'Touro',
@@ -17,9 +17,9 @@ async function main() {
     'Peixes',
   ];
 
-  for (const sign of signs) {
+  for (const option of options) {
     await prisma.sign.create({
-      data: { sign },
+      data: { option },
     });
   }
 }
