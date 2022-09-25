@@ -9,7 +9,7 @@ datasource db {
 
 model Sign {
   id     Int @id @default(autoincrement())
-  sign String @db.VarChar(20)
+  option String @db.VarChar(20)
 
   User User[]
 
@@ -18,7 +18,7 @@ model Sign {
 
 model SocialStatus {
   id     Int @id @default(autoincrement())
-  status String @db.VarChar(20)
+  option String @db.VarChar(20)
 
   User User[]
 
