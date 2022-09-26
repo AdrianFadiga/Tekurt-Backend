@@ -1,10 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDefined,
-  IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsUrl,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -18,7 +16,7 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
-  @MaxLength(30)
+  @MaxLength(15)
   @IsOptional()
   firstName: string;
 
@@ -30,7 +28,7 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
-  @MaxLength(30)
+  @MaxLength(20)
   @IsOptional()
   lastName: string;
 
@@ -42,7 +40,7 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsDefined()
   @MinLength(3)
-  @MaxLength(30)
+  @MaxLength(15)
   @IsOptional()
   username: string;
 
