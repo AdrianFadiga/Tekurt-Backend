@@ -14,7 +14,12 @@ export class TestimonialService {
     private userService: UserService,
   ) {}
   async findByUserId(userId: string) {
+    await this.verifyUserExists(userId);
     return this.testimonialModel.findByUserId(userId);
+  }
+
+  async getAll() {
+    return this.testimonialModel.getAll();
   }
 
   private async verifyUserExists(receiverId: string) {
