@@ -11,6 +11,10 @@ export class TestimonialModel {
     });
   }
 
+  async getAll() {
+    return this.databaseService.testimonial.findMany();
+  }
+
   async findById(id: string) {
     return this.databaseService.testimonial.findUnique({
       where: { id },
