@@ -48,6 +48,18 @@ export class UserModel {
         invites: {
           where: { status: 'pending' },
         },
+        testimonials: {
+          include: {
+            sender: {
+              select: {
+                firstName: true,
+                lastName: true,
+                username: true,
+                imageUrl: true,
+              },
+            },
+          },
+        },
         socialStatus: { select: { option: true } },
         sign: { select: { option: true } },
         drinking: { select: { option: true } },
