@@ -14,7 +14,9 @@ export class FriendService {
   ) {}
 
   async getMe(id: string) {
-    return this.friendModel.getMe(id);
+    const friends = await this.friendModel.getMe(id);
+    const invites = await this.friendModel.getInvites(id);
+    return { friends, invites };
   }
 
   async readAll(id: string) {

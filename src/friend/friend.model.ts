@@ -11,6 +11,12 @@ export class FriendModel {
     });
   }
 
+  async getInvites(id: string) {
+    return this.databaseService.friend.findMany({
+      where: { friendId: id, status: 'pending' },
+    });
+  }
+
   async readAll(id: string) {
     return this.databaseService.friend.findMany({
       where: { userId: id },
