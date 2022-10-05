@@ -94,3 +94,13 @@ Esses comandos executarão os testes na PORTA 3001, e criará um banco apenas pa
 ### Testes unitários
 
 ``npm run test:cov``
+
+## Contato:
+
+Adrian Martins Fadiga:
+
+https://www.linkedin.com/in/adrian-fadiga/
+
+Matheus Ferreira de Araujo:
+
+https://www.linkedin.com/in/matheus-ferreira-araujo/
