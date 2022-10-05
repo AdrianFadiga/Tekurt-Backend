@@ -72,12 +72,16 @@ A aplicação conta com três usuários cadastrados.
 Para fazer login com alguma das contas, basta utilizar:
 
 username: usuario
+
 senha: teste
 
+
 username: adrianfadiga
+
 senha: teste
 
 username: theusferreira
+
 senha: teste
 
 ## Dos testes
