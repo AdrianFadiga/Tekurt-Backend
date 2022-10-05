@@ -7,12 +7,14 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/login/decorator';
 import { JwtGuard } from 'src/login/guard';
 import { FriendService } from './friend.service';
 
-@Controller('friend')
+@ApiBearerAuth()
+@Controller('friends')
 @UseGuards(JwtGuard)
 export class FriendController {
   constructor(private friendService: FriendService) {}

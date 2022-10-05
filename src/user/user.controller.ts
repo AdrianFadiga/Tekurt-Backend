@@ -76,8 +76,8 @@ export class UserController {
     return this.userService.updatePhoto(id, file);
   }
 
-  @Delete('/me')
-  async delete(@GetUser() { id }: User, @Body() { password }: DeleteUserDto) {
-    return this.userService.delete(id, password);
-  }
+  // @Delete('/me')
+  // async delete(@GetUser() { id }: User, @Body() { password }: DeleteUserDto) {
+  //   return this.userService.delete(id, password);
+  // }
 }

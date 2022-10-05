@@ -8,12 +8,14 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/login/decorator';
 import { JwtGuard } from 'src/login/guard';
 import { TestimonialDto } from './dtos';
 import { TestimonialService } from './testimonial.service';
 
+@ApiBearerAuth()
 @UseGuards(JwtGuard)
 @Controller('testimonials')
 export class TestimonialController {
