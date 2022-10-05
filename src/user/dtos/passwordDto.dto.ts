@@ -22,13 +22,12 @@ export class passwordDto {
 
   @ApiProperty({
     description: 'Senha atual do usuário',
-    default: 'senhaAtual',
+    default: 'teste',
     required: true,
   })
   @IsString()
   @IsNotEmpty()
   @IsDefined()
-  @MinLength(6)
   @MaxLength(20)
   password: string;
 }

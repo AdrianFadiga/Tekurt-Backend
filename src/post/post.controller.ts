@@ -18,8 +18,10 @@ import { JwtGuard } from '../login/guard';
 import { PostDto } from './dtos';
 import { PostService } from './post.service';
 import { Express } from 'express';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
+@ApiBearerAuth()
 @Controller('posts')
 export class PostController {
   constructor(private postService: PostService) {}

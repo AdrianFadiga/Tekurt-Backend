@@ -10,7 +10,7 @@ import {
 export class UpdateUserDto {
   @ApiProperty({
     description: 'Nome do usuário',
-    default: 'João',
+    default: 'Tião',
     required: false,
   })
   @IsNotEmpty()
@@ -22,7 +22,7 @@ export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Sobrenome do usuário',
-    default: 'Da Silva',
+    default: 'Do Gás',
     required: false,
   })
   @IsNotEmpty()
@@ -34,7 +34,7 @@ export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Username do usuário',
-    default: 'JoaoDaSilva_Sk8',
+    default: 'TiaoDoGas',
     required: false,
   })
   @IsNotEmpty()
