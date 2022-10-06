@@ -45,7 +45,7 @@ No diretório raiz do projeto, rodar o seguinte comando:
 
 #### Atenção: os próximos comandos serão executados dentro do terminal do container!!!
 
-``npx prisma db push --force-reset && npx prisma db seed``
+``npm install && npx prisma db push --force-reset && npx prisma db seed``
 
 
 ### 5) Inicializar a aplicação
